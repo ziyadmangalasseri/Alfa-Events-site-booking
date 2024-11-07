@@ -1,87 +1,77 @@
-/* Fullscreen background image */
-.bg-image {
-    background: url('images/pexels-ywanphoto-57980.jpg') no-repeat center center;
+body {
+    font-family: Arial, sans-serif;
+    background: url('/public/images/pexels-ywanphoto-57980.jpg');
     background-size: cover;
-    position: relative;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
 }
 
-.login-box {
-    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-    backdrop-filter: blur(10px); /* Blur effect */
-    width: 90%;
-    max-width: 400px;
-    height: 90%;
-    color: white;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-}
-
-.alfa-logo {
-    width: 150px;
-    height: 150px;
-}
-
-h1 {
-    font-family: 'Oswald', sans-serif;
-    font-weight: 700;
-}
-
-p {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 400;
-}
-
-ul li {
-    margin: 10px 0;
-}
-
-ul li a {
-    text-decoration: none;
-    font-size: 1.1rem;
-    font-family: 'Montserrat', sans-serif;
-    color: white;
-}
-
-ul li a:hover {
-    color: #45a049;
-}
-
-.list-unstyled{
-    margin-top: 10%;
-    padding-top: 20%;
+.content-box {
+    height: 600px;
+    width: 350px;
+    max-width: 600px;
     background: rgba(0, 0, 0, 0.5);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-    height: 65%;
-    font-size: 0.75rem
-  
-}
-.list-unstyled li {
-    margin-bottom: 15px; /* Adjust as needed */
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+    color: white;
+    font-family: monospace;
+    
 }
 
-.circle {
-    width: 100px;            /* Default width for larger screens */
-    height: 100px;           /* Default height for larger screens */
-    border-radius: 50%;      /* Makes it round */
-    background-color: #6a6969;  /* Background color of the circle */
-    border: 2px solid #fcf9f9;  /* Optional: Add a border around the circle */
+.card-header {
+    padding: 30px;
+}
+.alfa-logo {
+    width: 120px;
+}
+
+.details-div {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 0px;
+    padding: 30px;
+    text-align: center;
+    height: 60%;
     display: flex;
-    justify-content: center;
     align-items: center;
-    margin-left: auto; /* Center align */
-    margin-right: auto; /* Center align */
+    
 }
+.details-div ul{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: start;
+}
+.details-div ul li{
+    font-size: small;
+}
+.ul.list-unstyled {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .info-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  .label {
+    width: 150px; /* Adjust width as needed for alignment */
+    font-weight: bold;
+    color: white;
+    text-align: start;
+    padding-right: 10px; /* Space between label and value */
+  }
+  
+  .value {
+    color: white;
+    /* margin-right: 0px; */
+  }
+  
 
-.profilename {
-    margin-top: 10%;
-    width: 80%;             /* Default width for larger screens */
-    height: 30px;           
-    border-radius: 5%; 
-    background-color: #6a6969;  
-    border: 2px solid #fcf9f9;
-    margin-left: auto; /* Center align */
-    margin-right: auto; /* Center align */
-}
 
-.profilecontainer{
-  margin-left: -20%;
-}
+
+
+
