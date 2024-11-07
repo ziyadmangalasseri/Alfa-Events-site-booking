@@ -1,0 +1,24 @@
+{
+  "name": "alfa-events-site-booking",
+  "version": "1.0.0",
+  "description": "alfa event project",
+  "main": "App.js",
+  "scripts": {
+    "start": "nodemon App.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "Alfa-Events-site-booking"
+  },
+  "author": "ziyad",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "env": "^0.0.2",
+    "express": "^4.21.1",
+    "mongoose": "^8.8.0",
+    "nodemon": "^3.1.7"
+  }
+}
