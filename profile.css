@@ -1,0 +1,87 @@
+/* Fullscreen background image */
+.bg-image {
+    background: url('images/pexels-ywanphoto-57980.jpg') no-repeat center center;
+    background-size: cover;
+    position: relative;
+}
+
+.login-box {
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    backdrop-filter: blur(10px); /* Blur effect */
+    width: 90%;
+    max-width: 400px;
+    height: 90%;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.alfa-logo {
+    width: 150px;
+    height: 150px;
+}
+
+h1 {
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+}
+
+p {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 400;
+}
+
+ul li {
+    margin: 10px 0;
+}
+
+ul li a {
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+}
+
+ul li a:hover {
+    color: #45a049;
+}
+
+.list-unstyled{
+    margin-top: 10%;
+    padding-top: 20%;
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    height: 65%;
+    font-size: 0.75rem
+  
+}
+.list-unstyled li {
+    margin-bottom: 15px; /* Adjust as needed */
+}
+
+.circle {
+    width: 100px;            /* Default width for larger screens */
+    height: 100px;           /* Default height for larger screens */
+    border-radius: 50%;      /* Makes it round */
+    background-color: #6a6969;  /* Background color of the circle */
+    border: 2px solid #fcf9f9;  /* Optional: Add a border around the circle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: auto; /* Center align */
+    margin-right: auto; /* Center align */
+}
+
+.profilename {
+    margin-top: 10%;
+    width: 80%;             /* Default width for larger screens */
+    height: 30px;           
+    border-radius: 5%; 
+    background-color: #6a6969;  
+    border: 2px solid #fcf9f9;
+    margin-left: auto; /* Center align */
+    margin-right: auto; /* Center align */
+}
+
+.profilecontainer{
+  margin-left: -20%;
+}
