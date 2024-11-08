@@ -4,15 +4,14 @@ const dotenv=require('dotenv').config();
 const mongooose=require('mongoose');
 const PORT=process.env.PORT || 5000;
 const MONGOURL=process.env.MONGO_URI;
+const AuthRouter= require('./route/authRoute');
 
 app.set('view engine','ejs');
 app.set('views','views');
 
 app.use(express.static('public'));
 
-app.get('/',(req,res)=>{
-    res.render('login');
-})
+app.use(AuthRouter);
 
 mongooose.connect(MONGOURL)
 .then(()=>{
