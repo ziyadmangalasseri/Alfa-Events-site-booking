@@ -5,6 +5,7 @@ const mongooose=require('mongoose');
 const PORT=process.env.PORT || 5000;
 const MONGOURL=process.env.MONGO_URI;
 const AuthRouter= require('./route/authRoute');
+const UserRouter=require('./route/userRoute');
 
 app.set('view engine','ejs');
 app.set('views','views');
@@ -12,6 +13,8 @@ app.set('views','views');
 app.use(express.static('public'));
 
 app.use(AuthRouter);
+app.use('/api/user',UserRouter);
+
 
 mongooose.connect(MONGOURL)
 .then(()=>{
