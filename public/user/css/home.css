@@ -1,0 +1,61 @@
+body {
+    font-family: Arial, sans-serif;
+    background: url('/public/images/wallpaperflare.com_wallpaper.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
+}
+
+.content-box {
+    height: 600px;
+    width: 350px;
+    max-width: 600px;
+    /* background: rgba(0, 0, 0, 0.5); */
+    border-radius: 15px;
+    background-color: rgb(246, 246, 246);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+    color: white;
+    font-family: monospace;
+    
+}
+
+.card-header {
+    padding: 30px;
+}
+.alfa-logo {
+    width: 120px;
+}
+
+.details-div {
+    background-color: rgb(32, 36, 33);
+    border-radius: 0px;
+    padding: 5px;
+    text-align: center;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+.details-div button {
+    border-radius: 10px;
+    width: 90%;
+    height: 12%;
+    background-color: rgb(223, 236, 230);
+    border: none;
+    font-weight: bold;
+}
+.details-div button:hover{
+    background-color: rgb(52, 140, 52);
+}
+.details-div button:active{
+    background-color: green;
+}
+
+
+
+
+
+
