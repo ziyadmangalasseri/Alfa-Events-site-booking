@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background: url('/images/pexels-ywanphoto-57980.jpg');
+    background: url('/images/wallpaper.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;
@@ -41,7 +41,7 @@ body {
     background: rgba(94, 90, 90, 0.5);
     border: none;
     text-align: center;
-    color: white;
+    /* color: white; */
 }
 .alfa-logo {
     width: 120px;
