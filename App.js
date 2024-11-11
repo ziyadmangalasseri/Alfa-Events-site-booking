@@ -1,28 +1,38 @@
-const express=require('express');
-const app=express();
-const dotenv=require('dotenv').config();
-const mongooose=require('mongoose');
-const PORT=process.env.PORT || 5000;
-const MONGOURL=process.env.MONGO_URI;
-const AuthRouter= require('./route/authRoute');
-const UserRouter=require('./route/userRoute');
+const express = require("express");
+const app = express();
+const dotenv = require("dotenv").config();
+const mongooose = require("mongoose");
+const bcrypt = require("bcrypt");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+const PORT = process.env.PORT || 5000;
+const MONGOURL = process.env.MONGO_URI;
+const AuthRouter = require("./route/authRoute");
+const UserRouter = require("./route/userRoute");
 
-app.set('view engine','ejs');
-app.set('views','views');
+app.set("view engine", "ejs");
+app.set("views", "views");
 
-app.use(express.static('public'));
+app.use(express.static("public"));
 
-app.use(AuthRouter);
-app.use('/api/user',UserRouter);
+app.use(cors());
+
+// Body-parser middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 
-mongooose.connect(MONGOURL)
-.then(()=>{
+app.use("/", AuthRouter);
+app.use("/api/user", UserRouter);
+
+mongooose
+  .connect(MONGOURL)
+  .then(() => {
     console.log(`mongodb connection successfull`);
-    app.listen(PORT,()=>{
-        console.log(`server is running http://localhost:${PORT}`);
-    })
-})
-.catch((err)=>{
+    app.listen(PORT, () => {
+      console.log(`server is running http://localhost:${PORT}`);
+    });
+  })
+  .catch((err) => {
     console.log(err);
-})
+  });
