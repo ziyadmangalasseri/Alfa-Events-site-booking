@@ -34,4 +34,4 @@ var userSchema= new mongoose.Schema({
     }
 
 });
-module.exports=mongoose.model('employees',userSchema);
+module.exports=mongoose.model('User',userSchema);
