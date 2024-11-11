@@ -31,24 +31,32 @@
             <div class="input-parent-div">
               <div class="form-group">
                 <label for="username">User ID</label>
-                <input type="text" id="userId" class="form-control"  />
+                <input type="text" id="userId" class="form-control" />
               </div>
               <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" id="password" class="form-control" />
               </div>
-              <p id="showerror" style="display: none; color: red ; text-align: center; margin-top: 0px;"> Invalid Id or Password try again </p>
+              <p
+                id="showerror"
+                style="
+                  display: none;
+                  color: red;
+                  text-align: center;
+                  margin-top: 0px;
+                "
+              >
+                Invalid Id or Password try again
+              </p>
             </div>
             <div class="form-group">
               <button
-              type="submit"
-              class="btn btn-dark btn-block"
-              id="login-button"
+                type="submit"
+                class="btn btn-dark btn-block"
+                id="login-button"
               >
-              Log In
-            </button>
-          
-            
+                Log In
+              </button>
             </div>
           </form>
         </div>
@@ -60,9 +68,9 @@
         event.preventDefault();
         const userId = document.getElementById("userId").value;
         const password = document.getElementById("password").value;
-
+    
         if (userId && password) {
-          console.log('signin fetch started');
+          console.log("signin fetch started");
           fetch("http://localhost:3000/userlogin", {
             method: "POST",
             headers: {
@@ -72,32 +80,38 @@
           })
             .then((response) => {
               if (!response.ok) {
-                throw new Error(
-                  `Network response was not ok (status ${response.status})`
-                );
+                // Check if the response is a JSON error message from the backend
+                return response.json().then((data) => {
+                  throw new Error(data.message || "An error occurred.");
+                });
               }
               return response.json();
             })
             .then((data) => {
               if (!data.success) {
-                // console.log(data);
+                // Show specific error message from backend
                 document.getElementById("showerror").style.display = "block";
-                // Provide a more specific error message based on the data.error property
-                // document.getElementById('showerror').textContent = data.error;
+                document.getElementById("showerror").textContent = data.message;
               } else {
+                // Redirect to the specified URL if login is successful
                 window.location.href = data.redirectUrl;
               }
             })
             .catch((err) => {
-              console.error("error message", err.message);
-              // Handle genaral errors here, e.g , display a generic error message
+              console.error("Error message:", err.message);
+              // Display general error message if specific error is not provided
               document.getElementById("showerror").style.display = "block";
               document.getElementById("showerror").textContent =
-                "An error occurred . Please try again later.";
+                err.message || "An error occurred. Please try again later.";
             });
+        } else {
+          // Show error if userId or password is missing
+          document.getElementById("showerror").style.display = "block";
+          document.getElementById("showerror").textContent =
+            "User ID and password are required.";
         }
-        console.log(userId, password);
       });
     </script>
+    
   </body>
 </html>
