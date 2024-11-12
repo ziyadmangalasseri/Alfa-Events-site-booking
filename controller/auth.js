@@ -6,6 +6,10 @@ const asyncHandler = require("async-handler");
 const signup = (req, res) => {
   res.render("signup");
 };
+const logout = async (req,res) => {
+  req.session.destroy();
+  res.redirect("/");
+}
 const createAccount = async (req, res) => {
   const {
     name,
@@ -41,6 +45,12 @@ const createAccount = async (req, res) => {
     });
 
     await newUser.save();
+
+
+    req.session.isLoggedIn = true;
+    req.session.userId = findUser.userId;
+    req.session.userDataId = findUser._id
+
     res.status(201).json({
       success: true,
       message: "Account created successfully!",
@@ -93,6 +103,10 @@ const userLogin = async (req, res) => {
 
     console.log("Password verified");
 
+    req.session.isLoggedIn = true;
+    req.session.userId = findUser.userId;
+    req.session.userDataId = findUser._id
+
     const response = {
       success: true,
       message: findUser.isAdmin
@@ -107,4 +121,4 @@ const userLogin = async (req, res) => {
   }
 };
 
-module.exports = { login, userLogin, signup, createAccount };
+module.exports = { login, userLogin, signup, createAccount,logout };

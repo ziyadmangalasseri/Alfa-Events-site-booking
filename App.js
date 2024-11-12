@@ -5,6 +5,7 @@ const mongooose = require("mongoose");
 const bcrypt = require("bcrypt");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const session = require("express-session");
 const PORT = process.env.PORT || 5000;
 const MONGOURL = process.env.MONGO_URI;
 const AuthRouter = require("./route/authRoute");
@@ -13,6 +14,13 @@ const UserRouter = require("./route/userRoute");
 app.set("view engine", "ejs");
 app.set("views", "views");
 
+//  Session configuration
+app.use(session({
+  secret: 'my secret key',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } 
+}))
 app.use(express.static("public"));
 
 app.use(cors());
