@@ -1,9 +1,21 @@
-const homePage= (req,res) =>{
-    res.render('user/home');
-}
+const homePage = (req, res) => {
+  if (req.session.isLoggedIn) {
+    res.render("user/home");
+  }else{
+    res.redirect("/");
+  }
+  console.log(req.session.isLoggedIn);
+  
+};
+
+const profilePage = (req, res) => {
+  if (req.session.isLoggedIn) {
+    res.render("user/profile");
+  }else{
+    res.redirect("/");
+  }
+};
 
 
-const profilePage= (req,res) =>{
-    res.render('user/profile');
-}
-module.exports={homePage,profilePage};
+
+module.exports = { homePage, profilePage, };
