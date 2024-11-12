@@ -1,4 +1,4 @@
-const User = require("../model/userMode");
+const User = require("../model/userModel");
 const bcrypt = require("bcrypt");
 const { json } = require("body-parser");
 const asyncHandler = require("async-handler");
