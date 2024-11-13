@@ -1,6 +1,17 @@
-const Event = require("../../model/EventSchema");
-const Employee = require("../../model/userModel");
-const Cron = require("node-cron");
+
+=======
+const Event=require('../../model/EventSchema');
+const Employee=require('../../model/userModel');
+const Cron=require('node-cron');
+const AddEventPage=async(req,res)=>{
+    try {
+        res.render('admin/addEvent')
+    } catch (error) {
+        console.error(error.message)
+        res.status(500).json({success:false,message:'Internal server error'});
+    }
+}
+
 
 
 const AddEventPage = async (req, res) => {
@@ -67,3 +78,4 @@ const AddEvent = async (req, res) => {
   }
 };
 module.exports = { AddEvent, AddEventPage };
+
