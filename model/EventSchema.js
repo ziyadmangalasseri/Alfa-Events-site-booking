@@ -34,6 +34,10 @@ const EventSchema=new mongoose.Schema({
   expirationTime:{
     type:Date,
     required:true
+},
+currentEmployers:{
+  type:Number,
+  default:0
 }
 }, {timestamps:true});
   module.exports=mongoose.model('events',EventSchema);
