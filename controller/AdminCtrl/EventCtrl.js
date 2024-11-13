@@ -1,13 +1,9 @@
-const Event = require("../../model/EventSchema");
 const Employee = require("../../model/userModel");
 const Cron = require("node-cron");
-
-
+const Event = require("../../model/EventSchema");
 const AddEventPage = async (req, res) => {
   try {
-    // const Event=await Event.find().populate('employee');
-    // const Employee=await Employee.find();
-    res.render("admin/addEvent", { Event, Employee });
+    res.render("admin/addEvent");
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ success: false, message: "Internal server error" });
@@ -35,7 +31,8 @@ const AddEvent = async (req, res) => {
       employerLimit,
       expirationTime,
     } = req.body;
-    console.log(
+
+    const newEvent = new Event({
       place,
       date,
       reportingTime,
@@ -43,27 +40,23 @@ const AddEvent = async (req, res) => {
       jobTitle,
       jobDescription,
       employerLimit,
-      expirationTime
-    );
-
-    const newEvent = new Event({
-      place: place,
-      date: date,
-      reportingTime: reportingTime,
-      exitTime: exitTime,
-      jobTitle: jobTitle,
-      jobDescription: jobDescription,
-      employerLimit: employerLimit,
-      expirationTime: expirationTime,
+      expirationTime,
     });
+
     await newEvent.save();
-    res
-      .status(200)
-      .json({ success: true, message: "new Event successfully created" });
-     
+
+    res.status(200).json({
+      success: true,
+      message: "New event successfully created",
+      redirectUrl: "/dashboard", // Update this URL as per your redirection needs
+    });
   } catch (error) {
     console.error(error.message);
-    res.status(500).json({ success: false, message: "Internal server error" });
+    res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
   }
 };
+
 module.exports = { AddEvent, AddEventPage };

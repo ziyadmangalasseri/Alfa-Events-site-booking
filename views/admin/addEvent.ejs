@@ -15,103 +15,109 @@
     <link rel="stylesheet" href="/css/admin/addEvent.css" />
   </head>
   <body>
-    <div
-      class="container d-flex align-items-center justify-content-center min-vh-100"
-    >
+    <div class="container d-flex align-items-center justify-content-center min-vh-100">
       <div class="content-box">
         <div class="card-header text-center mb-3">
           <h3 class="text-center mb-4">Create New Event</h3>
         </div>
         <form id="addEventForm" class="add-form">
-        <div class="details-div">
-            <!-- Form fields as list items -->
+          <div class="details-div">
             <ul class="list-unstyled">
               <li class="mb-3">
                 <label class="form-label">Place</label>
-                <input
-                  type="text"
-                  class="form-control input-dark"
-                  placeholder="Enter event place"
-                  name="place"
-                  required
-                />
+                <input type="text" class="form-control input-dark" placeholder="Enter event place" name="place" required />
               </li>
               <li class="mb-3">
                 <label class="form-label">Date</label>
-                <input
-                  type="date"
-                  class="form-control input-dark"
-                  name="date"
-                  required
-                />
+                <input type="date" class="form-control input-dark" name="date" required />
               </li>
               <li class="mb-3">
                 <label class="form-label">Reporting Time</label>
-                <input
-                  type="time"
-                  class="form-control input-dark"
-                  name="reportingTime"
-                  required
-                />
+                <input type="time" class="form-control input-dark" name="reportingTime" required />
               </li>
               <li class="mb-3">
                 <label class="form-label">Exit Time</label>
-                <input
-                  type="time"
-                  class="form-control input-dark"
-                  name="exitTime"
-                  required
-                />
+                <input type="time" class="form-control input-dark" name="exitTime" required />
               </li>
               <li class="mb-3">
                 <label class="form-label">Job Title</label>
-                <input
-                  type="text"
-                  class="form-control input-dark"
-                  placeholder="Enter job title"
-                  name="jobTitle"
-                  required
-                />
+                <input type="text" class="form-control input-dark" placeholder="Enter job title" name="jobTitle" required />
               </li>
               <li class="mb-3">
                 <label class="form-label">Job Description</label>
-                <textarea
-                  class="form-control input-dark"
-                  rows="3"
-                  placeholder="Enter job description"
-                  name="jobDescription"
-                  required
-                ></textarea>
+                <textarea class="form-control input-dark" rows="3" placeholder="Enter job description" name="jobDescription" required></textarea>
               </li>
               <li class="mb-3">
                 <label class="form-label">Employer Limit</label>
-                <input
-                  type="number"
-                  class="form-control input-dark"
-                  placeholder="Enter employer limit"
-                  min="0"
-                  name="employerLimit"
-                  required
-                />
+                <input type="number" class="form-control input-dark" placeholder="Enter employer limit" min="0" name="employerLimit" required />
               </li>
               <li class="mb-3">
                 <label class="form-label">Expiration Time</label>
-                <input
-                  type="datetime-local"
-                  class="form-control input-dark"
-                  name="expirationTime"
-                  required
-                />
+                <input type="datetime-local" class="form-control input-dark" name="expirationTime" required />
               </li>
             </ul>
           </div>
           <div class="button-div">
-            <button type="submit" class="btn" id="button">
-              Create Event
-            </button>
+            <button type="submit" class="btn" id="button">Create Event</button>
           </div>
         </form>
       </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      document.getElementById("addEventForm").addEventListener("submit", async function (event) {
+        event.preventDefault(); // Prevents the form from reloading the page
+
+        try {
+          const eventData = {
+            place: document.querySelector('input[name="place"]').value,
+            date: document.querySelector('input[name="date"]').value,
+            reportingTime: document.querySelector('input[name="reportingTime"]').value,
+            exitTime: document.querySelector('input[name="exitTime"]').value,
+            jobTitle: document.querySelector('input[name="jobTitle"]').value,
+            jobDescription: document.querySelector('textarea[name="jobDescription"]').value,
+            employerLimit: document.querySelector('input[name="employerLimit"]').value,
+            expirationTime: document.querySelector('input[name="expirationTime"]').value,
+          };
+
+          const response = await fetch("/addEvent", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(eventData),
+          });
+
+          const result = await response.json();
+          if (result.success) {
+            Swal.fire({
+              icon: "success",
+              title: "Event Added Successfully",
+              text: result.message || "Event created successfully.",
+              confirmButtonText: "OK",
+            }).then(() => {
+              window.location.href = result.redirectUrl || "/events";
+            });
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Event Addition Failed",
+              text: result.message || "Something went wrong while adding the event.",
+              confirmButtonText: "OK",
+            });
+          }
+        } catch (error) {
+          console.error("Error adding event:", error.message);
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: "An error occurred while adding the event",
+            confirmButtonText: "OK",
+          });
+        }
+      });
+    </script>
   </body>
 </html>

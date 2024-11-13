@@ -33,10 +33,18 @@
                 <label for="username">User ID</label>
                 <input type="text" id="userId" class="form-control" />
               </div>
-              <div class="form-group">
+              <div class="form-group position-relative">
                 <label for="password">Password</label>
                 <input type="password" id="password" class="form-control" />
+                <button
+                  type="button"
+                  id="togglePassword"
+                  class="toggle-password"
+                >
+                  👁️
+                </button>
               </div>
+
               <p
                 id="showerror"
                 style="
@@ -63,12 +71,29 @@
       </div>
     </div>
     <script>
+      const togglePassword = document.getElementById("togglePassword");
+      const passwordInput = document.getElementById("password");
+
+      togglePassword.addEventListener("click", function () {
+        // Toggle the type attribute
+        const type =
+          passwordInput.getAttribute("type") === "password"
+            ? "text"
+            : "password";
+        passwordInput.setAttribute("type", type);
+
+        // Toggle the icon (optional: change emoji based on visibility)
+        this.textContent = type === "password" ? "👁️" : "🙈";
+      });
+    </script>
+
+    <script>
       const form = document.getElementById("login-form");
       form.addEventListener("submit", (event) => {
         event.preventDefault();
         const userId = document.getElementById("userId").value;
         const password = document.getElementById("password").value;
-    
+
         if (userId && password) {
           console.log("signin fetch started");
           fetch("http://localhost:3000/userlogin", {
@@ -112,6 +137,5 @@
         }
       });
     </script>
-    
   </body>
 </html>
