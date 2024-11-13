@@ -54,7 +54,7 @@ const createAccount = async (req, res) => {
     res.status(201).json({
       success: true,
       message: "Account created successfully!",
-      redirectUrl: "/api/user/home",
+      redirectUrl: "/home",
     });
   } catch (error) {
     if (error.code === 11000) {
@@ -112,7 +112,7 @@ const userLogin = async (req, res) => {
       message: findUser.isAdmin
         ? "Admin login successfully"
         : "User login successfully",
-      redirectUrl: findUser.isAdmin ? "/api/admin/dashboard" : "/api/user/home",
+      redirectUrl: findUser.isAdmin ? "/dashboard" : "/home",
     };
     res.status(200).json(response);
   } catch (error) {

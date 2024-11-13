@@ -135,7 +135,7 @@
         expirationTime: document.querySelector('input[name="expirationTime"]').value
         };
        
-          const response=await fetch('/api/admin/addEvent',{
+          const response=await fetch('/addEvent',{
             method:'POST',
             headers:{
               'Content-Type':'application/json'
