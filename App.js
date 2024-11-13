@@ -31,8 +31,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
-app.use("/", AuthRouter);
-app.use("/api/user", UserRouter);
+app.use(AuthRouter);
+app.use( UserRouter);
 app.use(AdminRouter);
 
 mongooose
