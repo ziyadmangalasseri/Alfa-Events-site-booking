@@ -1,14 +1,27 @@
-const express=require('express');
-const router=express.Router();
-const {renderEmployeeForm,Employee} =require('../controller/AdminCtrl/EmployeeCtrl');
-const {AddEventPage,AddEvent} = require('../controller/AdminCtrl/EventCtrl');
-const { dashboard } = require('../controller/AdminCtrl/adminCtrl');
+const express = require("express");
+const router = express.Router();
+const {
+  renderEmployeeForm,
+  Employee,
+  renderallemployees,
+} = require("../controller/AdminCtrl/EmployeeCtrl");
 
+const {
+  AddEventPage,
+  AddEvent,
+  ShowEventPage,
+} = require("../controller/AdminCtrl/EventCtrl");
+const { dashboard } = require("../controller/AdminCtrl/adminCtrl");
 
-router.get('/addEmployeePage',renderEmployeeForm,);
-router.get('/addEventPage',AddEventPage);
-router.post('/addEvent',AddEvent);
-router.get("/dashboard",dashboard)
+router.get("/addEmployee", renderEmployeeForm);
+router.post("/addEmployee", Employee);
 
+router.get("/showemployeespage", renderallemployees);
 
-module.exports=router;
+router.get("/dashboard", dashboard);
+router.get("/addEventPage", AddEventPage);
+router.get("/showEventPage", ShowEventPage);
+
+router.post("/addEvent", AddEvent);
+
+module.exports = router;

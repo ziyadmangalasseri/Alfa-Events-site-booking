@@ -1,10 +1,17 @@
+<<<<<<< HEAD
 body {
     background-color: #222;
+=======
+
+body {
+    background-color: #222 ;
+>>>>>>> main
     color: #fff;
     font-family: Arial, sans-serif;
 }
 
 .container {
+<<<<<<< HEAD
     width: 40%;
     margin: 0 auto;
     padding: 20px;
@@ -50,3 +57,31 @@ body {
     border-radius: 5px;
     cursor: pointer;
 }
+=======
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 600px; /* Set a max width for larger screens */
+}
+
+.number {
+    color: #fff;
+}
+
+
+.form-control {
+    background-color: rgba(0, 0, 0, 0.5);
+    /* color: #fff; */
+    border: none;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+}
+
+.btn-danger {
+    background-color: red;
+    border: none;
+}
+>>>>>>> main
