@@ -48,8 +48,8 @@ const createAccount = async (req, res) => {
 
 
     req.session.isLoggedIn = true;
-    req.session.userId = findUser.userId;
-    req.session.userDataId = findUser._id
+    req.session.userId = newUser.userId;
+    req.session.userDataId = newUser._id
 
     res.status(201).json({
       success: true,
@@ -106,6 +106,7 @@ const userLogin = async (req, res) => {
     req.session.isLoggedIn = true;
     req.session.userId = findUser.userId;
     req.session.userDataId = findUser._id
+      
 
     const response = {
       success: true,
