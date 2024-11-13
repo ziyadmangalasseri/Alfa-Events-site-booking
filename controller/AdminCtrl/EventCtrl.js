@@ -1,5 +1,4 @@
 
-=======
 const Event=require('../../model/EventSchema');
 const Employee=require('../../model/userModel');
 const Cron=require('node-cron');
@@ -36,6 +35,18 @@ const ShowEventPage= async(req,res)=>{
     }
 }
 
+const EventdetailsPage=async(req,res)=>{
+    try {
+        const eventId=req.params.id;
+        const event=await Event.findById(eventId);
+        res.render('admin/eventDetailsPage',{event})
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({success:false, message:'Internal server error'});
+    }
+}
+
+
 Cron.schedule('0 0 * * *',async ()=>{
     const now=Date.now();
     try {
@@ -67,7 +78,7 @@ console.error(error.message);
 res.status(500).json({success:false,message:'Internal server error'});
 }
 }
-module.exports={AddEvent,AddEventPage,ShowEventPage};
+module.exports={AddEvent,AddEventPage,ShowEventPage,EventdetailsPage};
 
 
 
