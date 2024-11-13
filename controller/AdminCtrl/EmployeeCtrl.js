@@ -25,4 +25,12 @@ const Employee=async (req,res)=>{
 };
 
 
-module.exports={renderEmployeeForm,Employee};
+const renderallemployees = async (req, res) => {
+    try {
+      const allemployees = await EmployeeModel.find();
+      res.render('admin/adminshowallemployees', { employees: allemployees });
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to retrieve employees' });
+    }
+  };
+module.exports={renderEmployeeForm,Employee,renderallemployees};
