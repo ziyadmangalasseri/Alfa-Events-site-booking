@@ -12,6 +12,7 @@ const AuthRouter = require("./route/authRoute");
 const UserRouter = require("./route/userRoute");
 const AdminRouter=require('./route/adminRoute');
 
+
 app.set("view engine", "ejs");
 app.set("views", "views");
 
@@ -38,11 +39,11 @@ app.use(AdminRouter);
 mongooose
   .connect(MONGOURL)
   .then(() => {
-    console.log(`mongodb connection successfull`);
+    console.log('mongodb connection successfull');
     app.listen(PORT, () => {
       console.log(`server is running http://localhost:${PORT}`);
     });
   })
   .catch((err) => {
     console.log(err);
-  });
+  });
