@@ -4,8 +4,8 @@ const {
   AddEvent,
   ShowEventPage,
   AddEventPage,
-  EventdetailsPage
-} = require("../controller/AdminCtrl/EventCtrl"); 
+  EventdetailsPage,
+} = require("../controller/AdminCtrl/EventCtrl");
 const {
   renderEmployeeForm,
   Employee,
@@ -13,8 +13,6 @@ const {
 } = require("../controller/AdminCtrl/EmployeeCtrl");
 
 const { dashboard } = require("../controller/AdminCtrl/adminCtrl");
-const {AddEventPage,AddEvent,ShowEventPage,EventdetailsPage} = require('../controller/AdminCtrl/EventCtrl');
-
 
 router.get("/addEmployee", renderEmployeeForm);
 
@@ -28,12 +26,6 @@ router.get("/showEventPage", ShowEventPage);
 
 router.post("/addEvent", AddEvent);
 
-
-
 router.get("/eventDetail/:id", EventdetailsPage);
 
-
-module.exports=router;
-
-
-
+module.exports = router;
