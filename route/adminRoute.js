@@ -1,6 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const {
+  AddEvent,
+  ShowEventPage,
+  AddEventPage,
+  EventdetailsPage
+} = require("../controller/AdminCtrl/EventCtrl"); 
+const {
   renderEmployeeForm,
   Employee,
   renderallemployees,
