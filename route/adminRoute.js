@@ -19,4 +19,8 @@ router.get("/addEventPage", AddEventPage);
 router.get("/showEventPage", ShowEventPage);
 
 router.post("/addEvent", AddEvent);
+
+
+router.get("/eventDetail/:id", EventdetailsPage);
+
 module.exports = router;
