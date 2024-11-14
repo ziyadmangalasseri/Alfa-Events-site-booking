@@ -6,20 +6,12 @@ const {
   renderallemployees,
 } = require("../controller/AdminCtrl/EmployeeCtrl");
 
-const {
-  AddEventPage,
-  AddEvent,
-  ShowEventPage,
-  EventdetailsPage,
-} = require("../controller/AdminCtrl/EventCtrl");
-
 const { dashboard } = require("../controller/AdminCtrl/adminCtrl");
 
 router.get("/addEmployee", renderEmployeeForm);
 
 router.post("/addEmployee", Employee);
 
-// const {dashboard} = require("../controller/AdminCtrl/adminCtrl");
 router.get("/showemployeespage", renderallemployees);
 
 router.get("/dashboard", dashboard);
