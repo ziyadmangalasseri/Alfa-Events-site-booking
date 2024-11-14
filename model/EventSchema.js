@@ -33,7 +33,7 @@ const EventSchema=new mongoose.Schema({
 },
   expirationTime:{
     type:Date,
-    required:true
+ 
 },
 currentEmployers:{
   type:Number,
