@@ -1,87 +1,72 @@
-<<<<<<< HEAD
 body {
-    background-color: #222;
-=======
-
-body {
-    background-color: #222 ;
->>>>>>> main
-    color: #fff;
-    font-family: Arial, sans-serif;
+  background-color: #222;
+  color: #fff;
+  font-family: Arial, sans-serif;
 }
 
 .container {
-<<<<<<< HEAD
-    width: 40%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.8);
-    border-radius: 10px;
+  width: 40%;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
 }
 
 .title {
-    text-align: center;
-    margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .employee-list {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .employee {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .number {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .employee-name {
-    flex: 1;
-    background-color: rgba(0, 0, 0, 0.5);
-    border: none;
-    color: #fff;
-    padding: 10px;
-    width: 10%;
-    margin-right:20px ;
+  flex: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: #fff;
+  padding: 10px;
+  width: 10%;
+  margin-right: 20px;
 }
 
 .edit-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-=======
-    background-color: rgba(0, 0, 0, 0.8);
-    border-radius: 10px;
-    padding: 20px;
-    max-width: 600px; /* Set a max width for larger screens */
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .number {
-    color: #fff;
+  color: #fff;
 }
 
-
 .form-control {
-    background-color: rgba(0, 0, 0, 0.5);
-    /* color: #fff; */
-    border: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* color: #fff; */
+  border: none;
 }
 
 .btn-primary {
-    background-color: #007bff;
-    border: none;
+  background-color: #007bff;
+  border: none;
 }
 
 .btn-danger {
-    background-color: red;
-    border: none;
+  background-color: red;
+  border: none;
 }
->>>>>>> main
