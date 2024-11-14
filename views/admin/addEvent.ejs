@@ -23,7 +23,7 @@
           <h3 class="text-center mb-4">Create New Event</h3>
         </div>
         <form id="addEventForm" class="add-form">
-        <div class="details-div">
+          <div class="details-div">
             <ul class="list-unstyled">
               <li class="mb-3">
                 <label class="form-label">Place</label>
@@ -103,13 +103,16 @@
                 />
               </li>
             </ul>
-
-        </form>
-      </div>
-    </div>
-          <button type="button" class="btn btn-dark w-100 mt-3" id="Eventaddbtn">
-            Create Event
-          </button>
+          </div>
+          <div class="button-div">
+            <button
+              type="button"
+              class="btn btn-dark w-100 mt-3"
+              id="Eventaddbtn"
+            >
+              Create Event
+            </button>
+          </div>
         </form>
       </div>
     </div>
@@ -117,55 +120,72 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-      document.getElementById('Eventaddbtn').addEventListener('click',async function(){
-    try {
-        const eventData={
-        place: document.querySelector('input[name="place"]').value,
-        date: document.querySelector('input[name="date"]').value,
-        reportingTime: document.querySelector('input[name="reportingTime"]').value,
-        exitTime: document.querySelector('input[name="exitTime"]').value,
-        jobTitle: document.querySelector('input[name="jobTitle"]').value,
-        jobDescription: document.querySelector('textarea[name="jobDescription"]').value,
-        employerLimit: document.querySelector('input[name="employerLimit"]').value,
-        expirationTime: document.querySelector('input[name="expirationTime"]').value
-        };
-       
-          const response=await fetch('/addEvent',{
-            method:'POST',
-            headers:{
-              'Content-Type':'application/json'
-            },
-            body:JSON.stringify(eventData),
-          })
-          const result= await response.json();
-          if(result.success){
+      document
+        .getElementById("Eventaddbtn")
+        .addEventListener("click", async function () {
+          try {
+            const eventData = {
+              place: document.querySelector('input[name="place"]').value,
+              date: document.querySelector('input[name="date"]').value,
+              reportingTime: document.querySelector(
+                'input[name="reportingTime"]'
+              ).value,
+              exitTime: document.querySelector('input[name="exitTime"]').value,
+              jobTitle: document.querySelector('input[name="jobTitle"]').value,
+              jobDescription: document.querySelector(
+                'textarea[name="jobDescription"]'
+              ).value,
+              employerLimit: document.querySelector(
+                'input[name="employerLimit"]'
+              ).value,
+              expirationTime: document.querySelector(
+                'input[name="expirationTime"]'
+              ).value,
+            };
+
+            const response = await fetch("/addEvent", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(eventData),
+            });
+
+            const result = await response.json();
+            if (result.success) {
+              Swal.fire({
+                icon: "success",
+                title: "Event Added Successfully",
+                text: result.message || "Event has been successfully created",
+                confirmButtonText: "OK",
+              }).then(() => {
+                if (result.redirectUrl) {
+                  window.location.href = result.redirectUrl;
+                }
+              });
+            } else {
+              Swal.fire({
+                icon: "error",
+                title: "Event Creation Failed",
+                text:
+                  result.message ||
+                  "Something went wrong while adding the event",
+                confirmButtonText: "OK",
+              });
+            }
+          } catch (error) {
+            console.error(
+              "An error occurred while adding the event:",
+              error.message
+            );
             Swal.fire({
-              icon:'success',
-              title:'Event Added success',
-              text:'Event added successfully created' || result.message,
-              confirmButtonText:'OK',
-            }).then(()=>{
-              window.location.href= result.redirectUrl;
-            })
+              icon: "error",
+              title: "Error",
+              text: "An error occurred while adding the event",
+              confirmButtonText: "OK",
+            });
           }
-          else{
-            Swal.fire({
-              icon:'error',
-              title:'Event Added failed',
-              text:'Event added something went wrong' || result.message,
-              confirmButtonText:'OK',
-            })
-          }
-        } catch (error) {
-          console.error('Event adding section something went wrong',error.message);
-        Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'An error occurred while adding the event',
-        confirmButtonText: 'OK',
-      });
-        }
-      })
+        });
     </script>
   </body>
 </html>
