@@ -14,6 +14,7 @@ const {
 
 const { dashboard } = require("../controller/AdminCtrl/adminCtrl");
 
+
 router.get("/addEmployee", renderEmployeeForm);
 
 router.post("/addEmployee", Employee);
