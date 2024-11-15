@@ -1,0 +1,26 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.form-container {
+    background-color: rgba(0, 0, 0, 0.7); /* Dark, translucent background */
+    max-width: 500px;
+    width: 100%;
+}
+
+.input-dark {
+    background-color: rgba(0, 0, 0, 0.5); /* Dark input background */
+    color: #fff;
+    border: none;
+}
+
+.input-dark:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(63, 227, 13, 0.5);
+}
+
+.form-label {
+    font-weight: bold;
+}
+

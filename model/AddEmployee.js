@@ -24,6 +24,7 @@ const addEmployeeSchema = new mongoose.Schema({
     EmployeeId:{
         type:Number,
         required:true,
+        unique:true,
     }
 
 })
