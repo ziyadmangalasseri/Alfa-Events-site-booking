@@ -46,11 +46,11 @@ var userSchema= new mongoose.Schema({
         type:Date,
         required:true
     },
-    DateofBirth:{
+    DateOfBirth:{
         type:Date,
         required:true
     },
-    bloodGroup:{
+    BloodGroup:{
         type:String,
         required:true
     },
