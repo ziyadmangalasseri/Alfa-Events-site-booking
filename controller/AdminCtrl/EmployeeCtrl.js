@@ -54,10 +54,31 @@ const renderallemployees = async (req, res) => {
   }
   };
 
+  const detailsOfEditEmployee = async(req,res)=>{
+    try {
+      
+      const employeeId = Number(req.params.id);
+
+      if (isNaN(employeeId)) {
+          return res.status(400).send('Invalid Employee ID');
+      }
+      const employee = await EmployeeModel.findOne({ EmployeeId: employeeId });
+    
+      if (!employee) {
+          return res.status(404).send('Employee not found');
+      }
+
+      res.render('admin/editEmployee', { employee });
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Failed to load employee data');
+  }
+  }
+
   const editEmployee = async(req,res)=>{
     try {
-      const employeeId = req.params.id;
-      if (!employeeId) {
+      const employeeId = Number(req.params.id);
+      if (isNaN(employeeId)) {
           return res.status(400).send('Invalid Employee ID');
       }
 

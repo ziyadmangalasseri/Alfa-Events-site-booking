@@ -76,6 +76,21 @@ const EventdetailsPage = async (req, res) => {
   }
 };
 
+const EditEventPage=async (req,res)=>{
+  try {
+    const eventId=req.params.id;
+    const event=await Event.findById(eventId);
+    if(!event){
+      return res.status(400).json({success:false,message:'Event is not found'});
+    }
+    res.render('admin/editEventPage',{event});
+    
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({success:false,message:'Internal server error'});
+  }
+}
+
 Cron.schedule("0 0 * * *", async () => {
   const now = Date.now();
   try {
@@ -113,11 +128,57 @@ const AddEvent = async (req, res) => {
       .json({
         success: true,
         message: "new Event successfully created",
-        redirectUrl: "/addEventPage",
+        redirectUrl: "/showEventPage",
       });
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
-module.exports = { AddEvent, AddEventPage, ShowEventPage, EventdetailsPage };
+
+const EditEvent = async(req,res)=>{
+  try {
+    const eventId=req.params.id;
+    const {
+      place,
+      date,
+      reportingTime,
+      exitTime,
+      jobTitle,
+      jobDescription,
+      employerLimit,
+      expirationTime,
+    } = req.body;
+
+    const newEvent = await Event.findByIdAndUpdate(eventId,{
+      place,
+      date,
+      reportingTime,
+      exitTime,
+      jobTitle,
+      jobDescription,
+      employerLimit,
+      expirationTime,
+    });
+    await newEvent.save();
+    res.status(200).json({success:true,message:'Event successfully edited',redirectUrl:'/showEventPage'})
+
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).json({success:false,message:'Internal server error'});
+  }
+}
+
+const DeleteEvent= async(req,res)=>{
+    try {
+      const {id}=req.body;
+      console.log('id is',id);
+      await Event.findByIdAndDelete(id);
+      res.status(200).json({ success:true,message:'Event successfully deleted',redirectUrl:'/showEventPage'})
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).json({success:false, message:'Internal server errror'});
+    }
+}
+
+module.exports = { AddEvent, AddEventPage, ShowEventPage, EventdetailsPage,EditEventPage,EditEvent,DeleteEvent };
