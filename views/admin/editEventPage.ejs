@@ -3,35 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Alfa Events Login</title>
+    <title>Edit Event</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
     />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@200;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/css/admin/addEvent.css" />
   </head>
   <body>
     <div
       class="container d-flex align-items-center justify-content-center min-vh-100"
     >
-      <div class="content-box">
+      <div
+        class="content-box bg-dark text-white rounded p-4 shadow"
+        style="width: 350px; max-width: 600px;"
+      >
         <div class="card-header text-center mb-3">
-          <h3 class="text-center mb-4">Create New Event</h3>
+          <h3 class="text-center mb-4">Edit Event</h3>
         </div>
-        <form id="addEventForm" class="add-form">
-          <div class="details-div">
+        <form id="editEventForm" class="d-flex flex-column">
+          <div
+            class="details-div bg-secondary p-3 rounded overflow-auto mb-3"
+            style="height: 500px;"
+          >
             <ul class="list-unstyled">
               <li class="mb-3">
                 <label class="form-label">Place</label>
                 <input
                   type="text"
-                  class="form-control input-dark"
+                  class="form-control bg-dark text-white border-0"
                   placeholder="Enter event place"
                   name="place"
+                  value="<%= event.place %>"
                   required
                 />
               </li>
@@ -39,8 +41,9 @@
                 <label class="form-label">Date</label>
                 <input
                   type="date"
-                  class="form-control input-dark"
+                  class="form-control bg-dark text-white border-0"
                   name="date"
+                  value="<%= event.formattedDate %>"
                   required
                 />
               </li>
@@ -48,8 +51,9 @@
                 <label class="form-label">Reporting Time</label>
                 <input
                   type="time"
-                  class="form-control input-dark"
+                  class="form-control bg-dark text-white border-0"
                   name="reportingTime"
+                  value="<%= event.reportingTime %>"
                   required
                 />
               </li>
@@ -57,8 +61,9 @@
                 <label class="form-label">Exit Time</label>
                 <input
                   type="time"
-                  class="form-control input-dark"
+                  class="form-control bg-dark text-white border-0"
                   name="exitTime"
+                  value="<%= event.exitTime %>"
                   required
                 />
               </li>
@@ -66,30 +71,31 @@
                 <label class="form-label">Job Title</label>
                 <input
                   type="text"
-                  class="form-control input-dark"
+                  class="form-control bg-dark text-white border-0"
                   placeholder="Enter job title"
                   name="jobTitle"
+                  value="<%= event.jobTitle %>"
                   required
                 />
               </li>
               <li class="mb-3">
                 <label class="form-label">Job Description</label>
                 <textarea
-                  class="form-control input-dark"
+                  class="form-control bg-dark text-white border-0"
                   rows="3"
                   placeholder="Enter job description"
                   name="jobDescription"
                   required
-                ></textarea>
+                ><%= event.jobDescription %></textarea>
               </li>
               <li class="mb-3">
                 <label class="form-label">Employer Limit</label>
                 <input
                   type="number"
-                  class="form-control input-dark"
+                  class="form-control bg-dark text-white border-0"
                   placeholder="Enter employer limit"
-                  min="0"
                   name="employerLimit"
+                  value="<%= event.employerLimit %>"
                   required
                 />
               </li>
@@ -97,95 +103,80 @@
                 <label class="form-label">Expiration Time</label>
                 <input
                   type="datetime-local"
-                  class="form-control input-dark"
+                  class="form-control bg-dark text-white border-0"
                   name="expirationTime"
+                  value="<%= event.formattedexpirationTime %>"
                   required
                 />
               </li>
             </ul>
           </div>
-          <div class="button-div">
+          <div class="d-flex justify-content-center">
             <button
-              type="button"
-              class="btn btn-dark w-100 mt-3"
-              id="Eventaddbtn"
+              type="submit"
+              class="btn btn-success w-50"
+              id="editEventBtn"
             >
-              Create Event
+              Update Event
             </button>
           </div>
         </form>
       </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <script>
-      document
-        .getElementById("Eventaddbtn")
-        .addEventListener("click", async function () {
-          try {
-            const eventData = {
-              place: document.querySelector('input[name="place"]').value,
-              date: document.querySelector('input[name="date"]').value,
-              reportingTime: document.querySelector(
-                'input[name="reportingTime"]'
-              ).value,
-              exitTime: document.querySelector('input[name="exitTime"]').value,
-              jobTitle: document.querySelector('input[name="jobTitle"]').value,
-              jobDescription: document.querySelector(
-                'textarea[name="jobDescription"]'
-              ).value,
-              employerLimit: document.querySelector(
-                'input[name="employerLimit"]'
-              ).value,
-              expirationTime: document.querySelector(
-                'input[name="expirationTime"]'
-              ).value,
-            };
+      document.getElementById('editEventForm').addEventListener('submit',async function(event){
+        event.preventDefault();
+        const form=event.target;
+        const formData=new FormData(form);
+        const data=Object.fromEntries(formData.entries());
 
-            const response = await fetch("/addEvent", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(eventData),
-            });
-
-            const result = await response.json();
-            if (result.success) {
-              Swal.fire({
+        console.log('data sent to',data);
+        try {
+          const response= await fetch('/event/edit/<%= event._id %>',{
+            method:'POST',
+            headers:{
+              'Content-Type': 'application/json'
+            },
+            body:JSON.stringify(data),
+          })
+          const result=await response.json();
+          if(result.success){
+            Swal.fire({
                 icon: "success",
                 title: "Event Edited Successfully",
-                text: result.message || "Event has been successfully created",
+                text: result.message || "Event has been successfully edited",
                 confirmButtonText: "OK",
               }).then(() => {
                 if (result.redirectUrl) {
                   window.location.href = result.redirectUrl;
                 }
               });
-            } else {
+             } else{
               Swal.fire({
                 icon: "error",
-                title: "Event Creation Failed",
+                title: "Event Edition Failed",
                 text:
                   result.message ||
-                  "Something went wrong while adding the event",
+                  "Something went wrong while editing the event",
                 confirmButtonText: "OK",
               });
-            }
-          } catch (error) {
-            console.error(
-              "An error occurred while adding the event:",
+              }
+        } catch (error) {
+          console.error(
+              "An error occurred while editing the event:",
               error.message
             );
             Swal.fire({
               icon: "error",
               title: "Error",
-              text: "An error occurred while adding the event",
+              text: "An error occurred while editing the event",
               confirmButtonText: "OK",
             });
-          }
-        });
+        }
+      })
+
     </script>
   </body>
 </html>

@@ -5,6 +5,9 @@ const {
   ShowEventPage,
   AddEventPage,
   EventdetailsPage,
+  EditEventPage,
+  EditEvent,
+  DeleteEvent
 } = require("../controller/AdminCtrl/EventCtrl");
 const {
   renderEmployeeForm,
@@ -26,10 +29,19 @@ router.post("/editEmployee/:id",editEmployee);
 
 
 router.get("/dashboard", dashboard);
+
 router.get("/addEventPage", AddEventPage);
+router.post("/addEvent", AddEvent);
+
+router.get("/eventDetail/:id", EventdetailsPage);
 router.get("/showEventPage", ShowEventPage);
 
-router.post("/addEvent", AddEvent);
-router.get("/eventDetail/:id", EventdetailsPage);
+router.get("/event/edit/:id",EditEventPage)
+router.post("/event/edit/:id",EditEvent);
+
+router.post("/event/delete/:id",DeleteEvent);
+
+
+
 
 module.exports = router;
