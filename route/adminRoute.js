@@ -20,7 +20,6 @@ const { dashboard } = require("../controller/AdminCtrl/adminCtrl");
 router.get("/addEmployee", renderEmployeeForm);
 router.post("/addEmployee", Employee);
 router.get("/showemployeespage", renderallemployees);
-
 router.get("/editemployee/:id",detailsOfEditEmployee);
 router.post("/editEmployee/:id",editEmployee);
 

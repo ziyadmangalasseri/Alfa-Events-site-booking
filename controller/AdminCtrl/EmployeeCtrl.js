@@ -27,7 +27,7 @@ const Employee = async (req, res) => {
 const renderallemployees = async (req, res) => {
   try {
     const allemployees = await EmployeeModel.find();
-    res.render("admin/showallemployees", { employees: allemployees });
+    res.render("admin/showEmployees", { employees: allemployees });
   } catch (error) {
     res.status(500).json({ error: "Failed to retrieve employees" });
   }
@@ -52,12 +52,12 @@ const renderallemployees = async (req, res) => {
       console.error(error);
       res.status(500).send('Failed to load employee data');
   }
-  }
+  };
 
   const editEmployee = async(req,res)=>{
     try {
-      const employeeId = Number(req.params.id);
-      if (isNaN(employeeId)) {
+      const employeeId = req.params.id;
+      if (!employeeId) {
           return res.status(400).send('Invalid Employee ID');
       }
 
