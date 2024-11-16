@@ -32,4 +32,56 @@ const renderallemployees = async (req, res) => {
     res.status(500).json({ error: "Failed to retrieve employees" });
   }
 };
-module.exports = { renderEmployeeForm, Employee, renderallemployees };
+   
+  const detailsOfEditEmployee = async(req,res)=>{
+    try {
+      
+      const employeeId = Number(req.params.id);
+
+      if (isNaN(employeeId)) {
+          return res.status(400).send('Invalid Employee ID');
+      }
+      const employee = await EmployeeModel.findOne({ EmployeeId: employeeId });
+    
+      if (!employee) {
+          return res.status(404).send('Employee not found');
+      }
+
+      res.render('admin/editEmployee', { employee });
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Failed to load employee data');
+  }
+  }
+
+  const editEmployee = async(req,res)=>{
+    try {
+      const employeeId = Number(req.params.id);
+      if (isNaN(employeeId)) {
+          return res.status(400).send('Invalid Employee ID');
+      }
+
+      const updatedEmployee = await EmployeeModel.findOneAndUpdate(
+          { EmployeeId: employeeId },
+          {
+              EmployeeName: req.body.EmployeeName,
+              Place: req.body.Place,
+              DateOfBirth: req.body.DateOfBirth,
+              JoinedDate: req.body.JoinedDate,
+              BloodGroup: req.body.BloodGroup,
+          },
+          { new: true } 
+      );
+
+      if (!updatedEmployee) {
+          return res.status(404).send('Employee not found for update');
+      }
+      res.redirect('/showemployeespage'); 
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Failed to update employee details');
+  }
+  }
+module.exports={renderEmployeeForm,Employee,renderallemployees,detailsOfEditEmployee,editEmployee};
+
+
