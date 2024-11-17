@@ -1,26 +1,122 @@
 body {
-    margin: 0;
     font-family: Arial, sans-serif;
-}
-
-.form-container {
-    background-color: rgba(0, 0, 0, 0.7); /* Dark, translucent background */
-    max-width: 500px;
+    background: url('/images/wallpaper.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .content-box {
+    max-height: 650px;
+    height: 100%;
+    max-width: 600px;
+    width: 350px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+    color: white;
+    font-family: monospace;
+    
+  }
+  
+  .card-header {
+    /* padding: 30px; */
+    margin-top: 15px;
+  }
+  .alfa-logo {
+    width: 120px;
+  }
+  
+  .details-div {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    height: 500px;
+    display: flex;
+    overflow-y: auto;
+    justify-content: center;
+    scrollbar-width: none;
+  }
+  
+  .details-div::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Edge */
+  }
+  .add-form{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .details-div ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .details-div ul li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 100%;
-}
-
-.input-dark {
-    background-color: rgba(0, 0, 0, 0.5); /* Dark input background */
-    color: #fff;
+  }
+  .form-control {
+    background: rgb(47, 45, 45);
+    color: white;
     border: none;
+  
+  
+  }
+  .form-control:focus{
+    background-color: black;
+    color: white;
+  }
+  .form-control::placeholder, 
+  textarea::placeholder {
+    color: #747373; /* Replace with your desired color */
+  }
+  .footer{
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    gap: 10px;
+  }
+ 
+  #Eventaddbtn {
+    background-color: rgb(8, 62, 6);
+    color: white;
+    width: 40%; 
+    height: 40px;
+    /* margin-top: 15px; */
+  }
+  #cancelBtn{
+    background-color: rgb(104, 2, 2);
+    color: white;
+    width: 40%; 
+    height: 40px;
+
+  }
+
+  .password-li{
+    position: relative;
+  }
+  
+  
+.toggle-password {
+  position: absolute;
+  top: 70%;
+  right: 0px;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+  color: white;
 }
 
-.input-dark:focus {
-    outline: none;
-    box-shadow: 0 0 5px rgba(63, 227, 13, 0.5);
+.toggle-password:focus {
+  outline: none;
 }
-
-.form-label {
-    font-weight: bold;
-}
-
+  
+  
+  
+  
+  
+  
