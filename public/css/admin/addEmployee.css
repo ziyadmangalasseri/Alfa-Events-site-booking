@@ -57,20 +57,20 @@ body {
     justify-content: center;
     width: 100%;
   }
-  .input-dark {
+  .form-control {
     background: rgb(47, 45, 45);
     color: white;
     border: none;
   
   
   }
-  .input-dark:focus{
+  .form-control:focus{
     background-color: black;
     color: white;
   }
-  .input-dark::placeholder, 
+  .form-control::placeholder, 
   textarea::placeholder {
-    color: #ffffff; /* Replace with your desired color */
+    color: #747373; /* Replace with your desired color */
   }
   .button-div{
     display: flex;
@@ -84,8 +84,27 @@ body {
     height: 40px;
     /* margin-top: 15px; */
   }
+
+  .password-li{
+    position: relative;
+  }
   
   
+.toggle-password {
+  position: absolute;
+  top: 70%;
+  right: 0px;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+  color: white;
+}
+
+.toggle-password:focus {
+  outline: none;
+}
   
   
   
