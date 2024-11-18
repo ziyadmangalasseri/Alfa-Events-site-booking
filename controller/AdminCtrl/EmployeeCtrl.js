@@ -78,7 +78,6 @@ const addEmployee = async (req, res) => {
   }
 };
 
-
 const renderallemployees = async (req, res) => {
   try {
     const allemployees = await EmployeeModel.find();
@@ -113,31 +112,32 @@ const employeeDetails = async (req, res) => {
     res.status(500).send("Failed to load employee data");
   }
 };
-const editEmployeePage = async (req,res) => {
-  try{
+const editEmployeePage = async (req, res) => {
+  try {
     const employeeId = req.params.id;
-    if(employeeId){
+    if (employeeId) {
       const employee = await EmployeeModel.findById(employeeId);
       const formattedEmployee = {
         ...employee._doc, // Spread original employee data
         JoiningDate: new Date(employee.JoiningDate).toISOString().split("T")[0],
         DateOfBirth: new Date(employee.DateOfBirth).toISOString().split("T")[0],
       };
-      if(employee){
-        res.render('admin/editEmployee',{employee:formattedEmployee});
-      }else{
-        return res.status(400).json({success:false,message:"employee id is error"});
+      if (employee) {
+        res.render("admin/editEmployee", { employee: formattedEmployee });
+      } else {
+        return res
+          .status(400)
+          .json({ success: false, message: "employee id is error" });
       }
-    }else{
-      return res.status(400).json({success:false,message:"employee id is not recived"});
-
+    } else {
+      return res
+        .status(400)
+        .json({ success: false, message: "employee id is not recived" });
     }
-
-  }catch(err){
+  } catch (err) {
     console.error(err.message);
-    
   }
-}
+};
 
 const editEmployee = async (req, res) => {
   try {
@@ -171,8 +171,27 @@ const editEmployee = async (req, res) => {
   }
 };
 
-// Export or attach the route handler to your Express app
-module.exports = { editEmployee };
+const deleteEmployee = async (req, res) => {
+  try {
+    const employeeId = req.params.id; // Extract the employee ID from the URL
+    if (!employeeId) {
+      return res.status(400).json({ error: "Invalid Employee ID" });
+    }
+
+    // Find and delete the employee
+    const deletedEmployee = await EmployeeModel.findByIdAndDelete(employeeId);
+
+    if (!deletedEmployee) {
+      return res.status(404).json({ error: "Employee not found" });
+    }
+
+    res.status(200).json({ success: true, message: "Employee deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting employee:", error);
+    res.status(500).json({ error: "Failed to delete employee" });
+  }
+};
+
 
 module.exports = {
   renderEmployeeForm,
@@ -181,4 +200,5 @@ module.exports = {
   employeeDetails,
   editEmployee,
   editEmployeePage,
+  deleteEmployee,
 };

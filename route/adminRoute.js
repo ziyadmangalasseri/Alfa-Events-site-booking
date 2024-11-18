@@ -16,6 +16,7 @@ const {
   employeeDetails,
   editEmployeePage,
   editEmployee,
+  deleteEmployee,
 } = require("../controller/AdminCtrl/EmployeeCtrl");
 
 const { dashboard } = require("../controller/AdminCtrl/adminCtrl");
@@ -26,6 +27,7 @@ router.get("/showemployeespage", renderallemployees);
 router.get("/showEmployeeDetails/:id", employeeDetails);
 router.get("/editEmployee/:id",editEmployeePage)
 router.put("/editEmployee/:id", editEmployee);
+router.delete("/deleteEmployee/:id",deleteEmployee);
 
 router.get("/dashboard", dashboard);
 
