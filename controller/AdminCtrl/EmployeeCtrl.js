@@ -172,7 +172,6 @@ const editEmployee = async (req, res) => {
 };
 
 // Export or attach the route handler to your Express app
-module.exports = { editEmployee };
 
 module.exports = {
   renderEmployeeForm,
