@@ -76,14 +76,26 @@ textarea::placeholder {
   display: flex;
   justify-content: center;
   padding: 10px;
+  gap: 5px;
 }
 .footer button {
-  background-color: rgb(8, 62, 6);
   color: white;
-  width: 50%;
+  width: 40%;
   border-radius: 8px;
+  border: none;
+  height: 40px;
   
 }
+.creat-event-btn{
+  background-color: rgb(8, 62, 6);
+  
+}
+.cancel-btn{
+  background-color: rgb(61, 70, 0);
+  
+}
+
+
 
 
 

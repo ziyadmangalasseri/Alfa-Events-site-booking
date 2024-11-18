@@ -107,15 +107,24 @@
           <div class="footer">
             <button
               type="button"
-              class="btn"
-              id="Eventaddbtn"
+              class="cancel-btn"
+              onclick="cancelEdit()"
+              id="cancelBtn"
             >
+              Cancel
+            </button>
+            <button type="button" class="creat-event-btn" id="Eventaddbtn">
               Create Event
             </button>
           </div>
         </form>
       </div>
     </div>
+    <script>
+      function cancelEdit() {
+        window.location.href = "/showEventPage";
+      }
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

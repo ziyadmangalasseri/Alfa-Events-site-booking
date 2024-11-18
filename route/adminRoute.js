@@ -40,6 +40,6 @@ router.get("/showEventPage", ShowEventPage);
 router.get("/event/edit/:id", EditEventPage);
 router.post("/event/edit/:id", EditEvent);
 
-router.post("/event/delete/:id", DeleteEvent);
+router.delete("/event/delete/:id", DeleteEvent);
 
 module.exports = router;

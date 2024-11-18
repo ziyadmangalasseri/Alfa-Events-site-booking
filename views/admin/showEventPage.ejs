@@ -23,32 +23,36 @@
           <h3 class="text-center mb-4">Event List</h3>
         </div>
         <div class="details-div">
-          
-        <div id="eventList">
-            <% if (Array.isArray(event) && event.length > 0) { %>
-                <% event.forEach(function(event, index){ %>
-                  <div class="event-item d-flex justify-content-between align-items-center mb-3 p-3" >
-                    <!-- Wrap event place and date in clickable links -->
-                    <a href="/eventDetail/<%= event._id %>" class="text-decoration-none text-white">
-                      <h6 class="place-text"><%= event.place %></h6>
-                      <h6 class="date-text"><%= event.formattedDate %></h6>
-                    </a>
-                  </div>
-                <% }) %>
-              <% } else { %>
-                <p>No events available.</p>
-              <% } %>
+          <div id="eventList">
+            <% if (Array.isArray(event) && event.length > 0) { %> <%
+            event.forEach(function(event, index){ %>
+            <a
+              href="/eventDetail/<%= event._id %>"
+              class="text-decoration-none text-white"
+            >
+              <div
+                class="event-item d-flex justify-content-between align-items-center mb-3 p-3"
+              >
+                <div>
+                  <!-- Wrap event place and date in clickable links -->
+                  <h6 class="place-text"><%= event.place %></h6>
+                  <h6 class="date-text"><%= event.formattedDate %></h6>
+                </div>
+              </div>
+            </a>
+            <% }) %> <% } else { %>
+            <p>No events available.</p>
+            <% } %>
+          </div>
         </div>
-      </div>
-      <div class="footer">
-        <a href="/addEventpage"><button>Add Event</button></a>
-      </div>
+        <div class="footer">
+          <a href="/dashboard" ><button class="home-btn">Home</button></a>
+          <a href="/addEventpage"><button class="addEvent-btn">Add Event</button></a>
+
+        </div>
       </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    
   </body>
 </html>
-

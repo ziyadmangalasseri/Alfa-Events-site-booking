@@ -180,15 +180,24 @@ const EditEvent = async(req,res)=>{
 }
 
 const DeleteEvent= async(req,res)=>{
-    try {
-      const {id}=req.body;
-      console.log('id is',id);
-      await Event.findByIdAndDelete(id);
-      res.status(200).json({ success:true,message:'Event successfully deleted',redirectUrl:'/showEventPage'})
-    } catch (error) {
-      console.error(error.message);
-      res.status(500).json({success:false, message:'Internal server errror'});
+  try {
+    const eventId = req.params.id; // Extract the employee ID from the URL
+    if (!eventId) {
+      return res.status(400).json({ error: "Invalid event ID" });
     }
+
+    // Find and delete the employee
+    const deletedEvent = await Event.findByIdAndDelete(eventId);
+
+    if (!deletedEvent) {
+      return res.status(404).json({ error: "event not found" });
+    }
+
+    res.status(200).json({ success: true, message: "Event deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting event:", error);
+    res.status(500).json({ error: "Failed to delete event" });
+  }
 }
 
 module.exports = { AddEvent, AddEventPage, ShowEventPage, EventdetailsPage,EditEventPage,EditEvent,DeleteEvent };
