@@ -7,21 +7,25 @@ const {
   EventdetailsPage,
   EditEventPage,
   EditEvent,
-  DeleteEvent
+  DeleteEvent,
 } = require("../controller/AdminCtrl/EventCtrl");
 const {
   renderEmployeeForm,
-  Employee,
+  addEmployee,
   renderallemployees,
+  employeeDetails,
+  editEmployeePage,
+  editEmployee,
 } = require("../controller/AdminCtrl/EmployeeCtrl");
 
 const { dashboard } = require("../controller/AdminCtrl/adminCtrl");
 
 router.get("/addEmployee", renderEmployeeForm);
-
-router.post("/addEmployee", Employee);
-
+router.post("/addEmployee", addEmployee);
 router.get("/showemployeespage", renderallemployees);
+router.get("/showEmployeeDetails/:id", employeeDetails);
+router.get("/editEmployee/:id",editEmployeePage)
+router.put("/editEmployee/:id", editEmployee);
 
 router.get("/dashboard", dashboard);
 
@@ -31,12 +35,9 @@ router.post("/addEvent", AddEvent);
 router.get("/eventDetail/:id", EventdetailsPage);
 router.get("/showEventPage", ShowEventPage);
 
-router.get("/event/edit/:id",EditEventPage)
-router.post("/event/edit/:id",EditEvent);
+router.get("/event/edit/:id", EditEventPage);
+router.post("/event/edit/:id", EditEvent);
 
-router.post("/event/delete/:id",DeleteEvent);
-
-
-
+router.post("/event/delete/:id", DeleteEvent);
 
 module.exports = router;

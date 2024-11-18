@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alfa Events - Create Employee</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@200;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/admin/editEmployee.css" />
+  </head>
+  <body>
+    <div
+      class="container d-flex align-items-center justify-content-center min-vh-100"
+    >
+      <div class="content-box">
+        <div class="card-header text-center mb-3">
+          <h3>Edit Employee</h3>
+        </div>
+        <form id="employeeForm" class="add-form">
+          <div class="details-div">
+            <ul class="list-unstyled">
+              <li class="mb-3">
+                <label class="form-label">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Enter Employee Name"
+                  name="name"
+                  value="<%= employee.name %>"
+                  required
+                />
+              </li>
+              <li class="mb-3">
+                <label class="form-label">UserId</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="userId"
+                  value="<%= employee.userId %>"
+                  required
+                />
+              </li>
+
+              <li class="mb-3">
+                <label class="form-label">Phone Number</label>
+                <input
+                  type="tel"
+                  class="form-control"
+                  name="number"
+                  pattern="[0-9]{10}"
+                  value="<%= employee.number %>"
+                  required
+                />
+              </li>
+              <li class="mb-3">
+                <label class="form-label">Place</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="place"
+                  value="<%= employee.place %>"
+                  required
+                />
+              </li>
+              <li class="mb-3">
+                <label class="form-label">Joining Date</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  name="JoiningDate"
+                  value="<%= employee.JoiningDate %>"
+                  required
+                />
+              </li>
+              <li class="mb-3">
+                <label class="form-label">Date of Birth</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  name="DateOfBirth"
+                  value="<%= employee.DateOfBirth %>"
+                  required
+                />
+              </li>
+              <li class="mb-3">
+                <label class="form-label">Blood Group</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="BloodGroup"
+                  value="<%= employee.BloodGroup %>"
+                  required
+                />
+              </li>
+            </ul>
+          </div>
+          <div class="footer">
+            <button type="submit" class="btn" id="Eventaddbtn">Create</button>
+            <button type="button" class="btn" onclick="cancelEdit()" id="cancelBtn">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script>
+      function cancelEdit() {
+        window.location.href = "/showemployeespage";
+      }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+      const togglePassword = document.getElementById("togglePassword");
+      const passwordInput = document.getElementById("password");
+
+      togglePassword.addEventListener("click", function () {
+        // Toggle the type attribute
+        const type =
+          passwordInput.getAttribute("type") === "password"
+            ? "text"
+            : "password";
+        passwordInput.setAttribute("type", type);
+
+        // Toggle the icon (optional: change emoji based on visibility)
+        this.textContent = type === "password" ? "👁️" : "🙈";
+      });
+    </script>
+    <script>
+      document
+        .getElementById("employeeForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault(); // Prevent default form submission
+
+          const employeeId = "<%= employee._id %>"; // Employee ID from server-side templating
+          const formData = {
+            name: document.querySelector('[name="name"]').value,
+            userId: document.querySelector('[name="userId"]').value,
+            number: document.querySelector('[name="number"]').value,
+            place: document.querySelector('[name="place"]').value,
+            JoiningDate: document.querySelector('[name="JoiningDate"]').value,
+            DateOfBirth: document.querySelector('[name="DateOfBirth"]').value,
+            BloodGroup: document.querySelector('[name="BloodGroup"]').value,
+          };
+
+          try {
+            const response = await fetch(`/editEmployee/${employeeId}`, {
+              method: "PUT", // Use PUT for updates
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(formData), // Convert data to JSON
+            });
+
+            const result = await response.json();
+
+            if (response.ok) {
+              Swal.fire(
+                "Success",
+                "Employee details updated successfully!",
+                "success"
+              ).then(() => {
+                window.location.href = "/showemployeespage"; // Redirect after success
+              });
+            } else {
+              Swal.fire(
+                "Error",
+                result.error || "Failed to update employee details",
+                "error"
+              );
+            }
+          } catch (error) {
+            console.error(error);
+            Swal.fire("Error", "An unexpected error occurred", "error");
+          }
+        });
+    </script>
+  </body>
+</html>

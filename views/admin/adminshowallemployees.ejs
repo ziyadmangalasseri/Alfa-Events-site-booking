@@ -23,7 +23,10 @@
                             <input type="text" class="form-control" value="<%= employee.EmployeeName %>" readonly>
                         </div>
                         <div class="col-12 col-md-4 d-flex justify-content-center justify-content-md-end">
-                            <button class="btn btn-primary mr-2">Edit</button>
+                            <!-- <button class="btn btn-primary mr-2">Edit</button> -->
+                            <a href="/editemployee/<%= employee.EmployeeId %>">
+                                <button class="btn btn-primary mr-2">Edit</button>
+                            </a>
                             <button class="btn btn-danger">Delete</button>
                         </div>
                     </div>
