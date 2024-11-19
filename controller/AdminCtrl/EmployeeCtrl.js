@@ -171,6 +171,7 @@ const editEmployee = async (req, res) => {
   }
 };
 
+// Export or attach the route handler to your Express app
 const deleteEmployee = async (req, res) => {
   try {
     const employeeId = req.params.id; // Extract the employee ID from the URL

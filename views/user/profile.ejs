@@ -21,34 +21,35 @@
         <div class="details-div">
           <ul class="list-unstyled">
             <li class="info-item">
-              <span class="label">Name   </span>
-              <span class="value text-white">: [Name Value]</span>
+              <span class="label">Name</span>
+              <span class="value text-white">: <%= users.name %></span>
             </li>
             <li class="info-item">
-              <span class="label">User Id  </span>
-              <span class="value text-white">: [User Id Value]</span>
+              <span class="label">User Id</span>
+              <span class="value text-white">: <%= users.userId %></span>
             </li>
             <li class="info-item">
-              <span class="label">Phone Number </span>
-              <span class="value text-white">: [Phone Number Value]</span>
+              <span class="label">Phone Number</span>
+              <span class="value text-white">: <%= users.number %></span>
             </li>
             <li class="info-item">
               <span class="label">Place</span>
-              <span class="value text-white">: [Place Value]</span>
+              <span class="value text-white">: <%= users.place %></span>
             </li>
             <li class="info-item">
               <span class="label">Joining Date</span>
-              <span class="value text-white">: [Joining Date Value]</span>
+              <span class="value text-white">: <%= users.JoiningDate.toDateString() %></span>
             </li>
             <li class="info-item">
               <span class="label">Date Of Birth</span>
-              <span class="value text-white">: [Date of Birth Value]</span>
+              <span class="value text-white">: <%= users.DateOfBirth.toDateString() %></span>
             </li>
             <li class="info-item">
               <span class="label">Blood Group</span>
-              <span class="value text-white">: [Blood Group Value]</span>
+              <span class="value text-white">: <%= users.BloodGroup %></span>
             </li>
           </ul>
+          
           
         </div>
       </div>
