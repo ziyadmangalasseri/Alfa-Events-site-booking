@@ -92,9 +92,17 @@ const EditEventPage=async (req,res)=>{
 }
 
 Cron.schedule("0 0 * * *", async () => {
-  const now = Date.now();
+  const now =  Date.now();
+  console.log(`cron job is working is running at :${new Date(now).toLocaleString()}`);
+
+  
   try {
-    const result = await Event.deleteMany({ expirationtime: { $lt: now } });
+
+    const expiredEvent =  await Event.find({expirationTime:{$lt :now}});
+    console.log(expiredEvent);
+
+    const result = await Event.deleteMany({ expirationTime: { $lt: now } });
+
     console.log(`${result.deletedCount} expired Event deleted success`);
   } catch (error) {
     console.error("Error Expired Event deleting", error);
@@ -112,6 +120,7 @@ const AddEvent = async (req, res) => {
       employerLimit,
       expirationTime,
     } = req.body;
+    const formattedExpirationTime = new Date(expirationTime);
     const newEvent = new Event({
       place: place,
       date: date,
@@ -120,7 +129,8 @@ const AddEvent = async (req, res) => {
       jobTitle: jobTitle,
       jobDescription: jobDescription,
       employerLimit: employerLimit,
-      expirationTime: expirationTime,
+      expirationTime: formattedExpirationTime,
+      // expirationTime: new Date(expirationTime)
     });
     await newEvent.save();
     res
