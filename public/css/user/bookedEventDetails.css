@@ -70,22 +70,14 @@ body {
   padding: 20px;
 }
 
-.footer form button{
-    width: 100%;
-    height: 100%;
-    border-radius: 8px;
-    border: none;
-    background-color: rgb(0, 71, 0);
-    color: white;
-}
-.footer form button:active{
-  background-color:green;
-}
-.footer form {
-  width: 80%;
+.footer button {
+  width: 60%;
   height: 40px;
-  display: flex;
-  flex-direction: row;
-  gap: 5px;
+  border-radius: 8px;
+  border: none;
+  background-color: rgb(0, 71, 0);
+  color: white;
 }
-
+.footer button:active {
+  background-color: green;
+}
