@@ -29,23 +29,65 @@ body {
 
 .details-div {
     background: rgba(0, 0, 0, 0.6);
-    padding: 10px;
+    padding: 20px;
     text-align: center;
     height: 60%;
     display: flex;
     align-items: center;
 }
 .details-div ul {
+    padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 25px;
+    gap: 15px;
 }
 
 
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 1rem;
+  }
+  
+  .label {
+    font-weight: bold;
+    flex: 0.6;
+    text-align: left;
+    font-size: medium;
+  }
 
+  .value {
+    flex: 1;
+    text-align: left;
+    padding-left: 5px;
+    font-size: medium;
+  }
+  .footer {
+    display: flex;
+    padding: 5px;
+    justify-content: center;
+    align-items: center;
+}
 
+.footer button {
+  border-radius: 8px;
+  border: none;
+  width: 50%;
+  height: 40px;
+  color: white;
+  background-color: rgb(0, 65, 0);
+}
+
+.footer button:active {
+  background-color: rgb(3, 120, 3);
+}
+
+  
+
+  
 
 
 

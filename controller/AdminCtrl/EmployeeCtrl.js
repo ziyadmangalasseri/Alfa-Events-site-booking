@@ -19,62 +19,38 @@ const addEmployee = async (req, res) => {
       BloodGroup,
     } = req.body;
 
-    // Validate required fields
-    if (
-      !name ||
-      !userId ||
-      !password ||
-      !number ||
-      !place ||
-      !JoiningDate ||
-      !DateOfBirth ||
-      !BloodGroup
-    ) {
-      return res.status(400).send("All fields are required");
+    if (!name || !userId || !password || !number || !place || !JoiningDate || !DateOfBirth || !BloodGroup) {
+      return res.status(400).send("All fields are required.");
     }
 
-    // Check if employee with the same userId or number already exists
     const existingEmployee = await EmployeeModel.findOne({
       $or: [{ userId }, { number }],
     });
-
     if (existingEmployee) {
-      return res
-        .status(409)
-        .send(
-          `Employee with ${
-            existingEmployee.userId === userId ? "UserId" : "Phone Number"
-          } already exists`
-        );
+      return res.status(409).send(
+        `Employee with ${
+          existingEmployee.userId === userId ? "UserId" : "Phone Number"
+        } already exists`
+      );
     }
 
-    // Hash the password for security
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Parse dates to store only the date part
-    const joiningDate = new Date(JoiningDate).toISOString().split("T")[0];
-    const dateOfBirth = new Date(DateOfBirth).toISOString().split("T")[0];
-
-    // Create a new employee document
     const newEmployee = new EmployeeModel({
       name,
       userId,
       password: hashedPassword,
       number,
       place,
-      JoiningDate: joiningDate,
-      DateOfBirth: dateOfBirth,
+      JoiningDate,
+      DateOfBirth,
       BloodGroup,
     });
 
-    // Save the employee document to the database
     await newEmployee.save();
-
-    // Redirect to dashboard
     res.status(200).json({ redirectURL: "/dashboard" });
   } catch (err) {
-    console.error("Error adding employee:", err);
-    res.status(500).send("Error Adding Employee");
+    res.status(500).send(`Error Adding Employee: ${err.message}`);
   }
 };
 
@@ -186,13 +162,14 @@ const deleteEmployee = async (req, res) => {
       return res.status(404).json({ error: "Employee not found" });
     }
 
-    res.status(200).json({ success: true, message: "Employee deleted successfully" });
+    res
+      .status(200)
+      .json({ success: true, message: "Employee deleted successfully" });
   } catch (error) {
     console.error("Error deleting employee:", error);
     res.status(500).json({ error: "Failed to delete employee" });
   }
 };
-
 
 module.exports = {
   renderEmployeeForm,

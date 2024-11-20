@@ -107,83 +107,57 @@
           <div class="footer">
             <button
               type="button"
-              class="btn"
-              id="Eventaddbtn"
+              class="cancel-btn"
+              onclick="cancelEdit()"
+              id="cancelBtn"
             >
+              Cancel
+            </button>
+            <button type="button" class="creat-event-btn" id="Eventaddbtn">
               Create Event
             </button>
           </div>
         </form>
       </div>
     </div>
+    <script>
+      function cancelEdit() {
+        window.location.href = "/showEventPage";
+      }
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
+      // Submit Event Form
       document
         .getElementById("Eventaddbtn")
-        .addEventListener("click", async function () {
+        .addEventListener("click", async () => {
+          const eventData = Object.fromEntries(
+            new FormData(document.getElementById("addEventForm"))
+          );
           try {
-            const eventData = {
-              place: document.querySelector('input[name="place"]').value,
-              date: document.querySelector('input[name="date"]').value,
-              reportingTime: document.querySelector(
-                'input[name="reportingTime"]'
-              ).value,
-              exitTime: document.querySelector('input[name="exitTime"]').value,
-              jobTitle: document.querySelector('input[name="jobTitle"]').value,
-              jobDescription: document.querySelector(
-                'textarea[name="jobDescription"]'
-              ).value,
-              employerLimit: document.querySelector(
-                'input[name="employerLimit"]'
-              ).value,
-              expirationTime: document.querySelector(
-                'input[name="expirationTime"]'
-              ).value,
-            };
-
             const response = await fetch("/addEvent", {
               method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
+              headers: { "Content-Type": "application/json" },
               body: JSON.stringify(eventData),
             });
-
             const result = await response.json();
-            if (result.success) {
-              Swal.fire({
-                icon: "success",
-                title: "Event Edited Successfully",
-                text: result.message || "Event has been successfully created",
-                confirmButtonText: "OK",
-              }).then(() => {
-                if (result.redirectUrl) {
-                  window.location.href = result.redirectUrl;
-                }
-              });
-            } else {
-              Swal.fire({
-                icon: "error",
-                title: "Event Creation Failed",
-                text:
-                  result.message ||
-                  "Something went wrong while adding the event",
-                confirmButtonText: "OK",
-              });
-            }
-          } catch (error) {
-            console.error(
-              "An error occurred while adding the event:",
-              error.message
-            );
+
             Swal.fire({
-              icon: "error",
-              title: "Error",
-              text: "An error occurred while adding the event",
-              confirmButtonText: "OK",
+              icon: result.success ? "success" : "error",
+              title: result.success ? "Success" : "Error",
+              text: result.message || "Something went wrong.",
+            }).then(() => {
+              if (result.redirectUrl) window.location.href = result.redirectUrl;
             });
+          } catch (error) {
+            Swal.fire(
+              "Error",
+              "An error occurred while creating the event.",
+              "error"
+            );
+            console.error(error);
           }
         });
     </script>
