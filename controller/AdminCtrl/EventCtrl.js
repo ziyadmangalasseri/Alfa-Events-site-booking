@@ -132,7 +132,7 @@ const AddEvent = async (req, res) => {
       expirationTime: formattedExpirationTime,
       // expirationTime: new Date(expirationTime)
     });
-    await newEvent.save();
+    await newEvent.save();np
     res
       .status(200)
       .json({
