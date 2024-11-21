@@ -37,14 +37,21 @@ const ShowEventPage = async (req, res) => {
 const EventdetailsPage = async (req, res) => {
   try {
     const eventId = req.params.id;
+
     if (!mongoose.Types.ObjectId.isValid(eventId)) {
       return res
         .status(400)
         .json({ success: false, message: "Invalid event id" });
     }
-    const event = await Event.findById(eventId);
+
+    // Find the event and populate currentEmployers
+    const event = await Event.findById(eventId).populate(
+      "currentEmployers", // Field to populate
+      "name userId" // Fields to include from the employees collection
+    );
 
     if (event) {
+      // Format the event's date
       const date = new Date(event.date);
       event.formattedDate = date.toLocaleString("en-IN", {
         weekday: "short",
@@ -55,26 +62,33 @@ const EventdetailsPage = async (req, res) => {
         minute: "2-digit",
         hour12: true,
       });
-    }
-    if (event.expirationTime) {
-      const expirationTime = new Date(event.expirationTime);
-      event.formattedexpirationTime = expirationTime.toLocaleString("en-IN", {
-        weekday: "short",
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true,
-      });
+
+      // Format the event's expiration time
+      if (event.expirationTime) {
+        const expirationTime = new Date(event.expirationTime);
+        event.formattedexpirationTime = expirationTime.toLocaleString(
+          "en-IN",
+          {
+            weekday: "short",
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true,
+          }
+        );
+      }
     }
 
+    // Render the page with the event and populated employee details
     res.render("admin/eventDetailsPage", { event });
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
+
 
 const EditEventPage = async (req, res) => {
   try {
