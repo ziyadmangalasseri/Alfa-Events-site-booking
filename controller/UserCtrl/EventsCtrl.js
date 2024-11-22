@@ -8,7 +8,7 @@ const showEvents = async (req, res) => {
     const events = await Event.find();
 
     // Fetch the logged-in employee's details (assuming req.user contains the authenticated user)
-    const employee = await User.findById(req.session.userDataId).populate("myEvents");
+    const employee = await User.findById(req.session.uesrd).populate("myEvents");
 
     // Get IDs of booked events
     const bookedEventIds = employee.myEvents.map(event => event._id.toString());
