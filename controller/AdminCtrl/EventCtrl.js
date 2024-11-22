@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const Event = require("../../model/EventSchema");
 const Cron = require("node-cron");
-const moment = require("moment");
 
 const AddEventPage = async (req, res) => {
   try {
@@ -91,7 +90,6 @@ const EventdetailsPage = async (req, res) => {
 };
 
 
-
 const EditEventPage = async (req, res) => {
   try {
     const eventId = req.params.id;
@@ -101,22 +99,12 @@ const EditEventPage = async (req, res) => {
         .status(400)
         .json({ success: false, message: "Event is not found" });
     }
-
-    // Format dates
-    event.formattedDate = moment(event.date).format("YYYY-MM-DD");
-    event.formattedexpirationTime = moment(event.expirationTime).format(
-      "YYYY-MM-DDTHH:mm"
-    );
-
     res.render("admin/editEventPage", { event });
   } catch (error) {
     console.error(error.message);
-    res
-      .status(500)
-      .json({ success: false, message: "Internal server error" });
+    res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
-
 
 Cron.schedule("0 0 * * *", async () => {
   const now = Date.now();
@@ -160,6 +148,12 @@ const AddEvent = async (req, res) => {
       expirationTime: formattedExpirationTime,
      
       // expirationTime: new Date(expirationTime)
+    });
+    await newEvent.save();
+    res.status(200).json({
+      success: true,
+      message: "new Event successfully created",
+      redirectUrl: "/showEventPage",
     });
   } catch (error) {
     console.error(error.message);
