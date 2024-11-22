@@ -4,9 +4,20 @@ const User = require("../../model/userModel");
 
 const showEvents = async (req, res) => {
   try {
-    const event = await Event.find();
+    // Fetch all events
+    const events = await Event.find();
 
-    event.forEach((event) => {
+    // Fetch the logged-in employee's details (assuming req.user contains the authenticated user)
+    const employee = await User.findById(req.session.userDataId).populate("myEvents");
+
+    // Get IDs of booked events
+    const bookedEventIds = employee.myEvents.map(event => event._id.toString());
+
+    // Filter out events that are already booked by the employee
+    const upcomingEvents = events.filter(event => !bookedEventIds.includes(event._id.toString()));
+
+    // Format event dates
+    upcomingEvents.forEach(event => {
       const date = new Date(event.date);
       event.formattedDate = date.toLocaleString("en-IN", {
         weekday: "short",
@@ -18,12 +29,15 @@ const showEvents = async (req, res) => {
         hour12: true,
       });
     });
-    res.render("user/upcomingEvents", { event });
+
+    // Render the filtered events
+    res.render("user/upcomingEvents", { event: upcomingEvents });
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ success: false, message: "Internal Server error" });
   }
 };
+
 
 const userEventDetails = async (req, res) => {
   try {
