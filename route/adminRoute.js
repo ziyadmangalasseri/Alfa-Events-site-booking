@@ -1,4 +1,6 @@
 const express = require("express");
+const {isAuthenticated}  = require("../middleware/isAuthenticated");
+
 const router = express.Router();
 const {
   AddEvent,
@@ -22,27 +24,27 @@ const {
 
 const { dashboard } = require("../controller/AdminCtrl/adminCtrl");
 
-router.get("/addEmployee", renderEmployeeForm);
-router.post("/addEmployee", addEmployee);
-router.get("/showemployeespage", renderallemployees);
-router.get("/showEmployeeDetails/:id", employeeDetails);
-router.get("/editEmployee/:id",editEmployeePage)
-router.put("/editEmployee/:id", editEmployee);
-router.delete("/deleteEmployee/:id",deleteEmployee);
+router.get("/addEmployee",isAuthenticated, renderEmployeeForm);
+router.post("/addEmployee",isAuthenticated, addEmployee);
+router.get("/showemployeespage",isAuthenticated,renderallemployees);
+router.get("/showEmployeeDetails/:id",isAuthenticated, employeeDetails);
+router.get("/editEmployee/:id",isAuthenticated,editEmployeePage)
+router.put("/editEmployee/:id", isAuthenticated,editEmployee);
+router.delete("/deleteEmployee/:id",isAuthenticated,deleteEmployee);
 
-router.get("/dashboard", dashboard);
+router.get("/dashboard",isAuthenticated, dashboard);
 
-router.get("/addEventPage", AddEventPage);
-router.post("/addEvent", AddEvent);
+router.get("/addEventPage",isAuthenticated, AddEventPage);
+router.post("/addEvent",isAuthenticated, AddEvent);
 
-router.get("/eventDetail/:id", EventdetailsPage);
-router.get("/showEventPage", ShowEventPage);
+router.get("/eventDetail/:id",isAuthenticated, EventdetailsPage);
+router.get("/showEventPage",isAuthenticated, ShowEventPage);
 
-router.get("/event/edit/:id", EditEventPage);
-router.post("/event/edit/:id", EditEvent);
-router.delete('/event/:eventId/employee/:userId', removeEmployeeFromEvent);
+router.get("/event/edit/:id",isAuthenticated, EditEventPage);
+router.post("/event/edit/:id",isAuthenticated, EditEvent);
+router.delete('/event/:eventId/employee/:userId',isAuthenticated, removeEmployeeFromEvent);
 
 
-router.delete("/event/delete/:id", DeleteEvent);
+router.delete("/event/delete/:id",isAuthenticated, DeleteEvent);
 
 module.exports = router;
