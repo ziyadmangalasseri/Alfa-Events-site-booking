@@ -149,12 +149,6 @@ const AddEvent = async (req, res) => {
      
       // expirationTime: new Date(expirationTime)
     });
-    await newEvent.save();
-    res.status(200).json({
-      success: true,
-      message: "new Event successfully created",
-      redirectUrl: "/showEventPage",
-    });
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ success: false, message: "Internal server error" });

@@ -8,6 +8,7 @@ const cors = require("cors");
 const session = require("express-session");
 const PORT = process.env.PORT || 5000;
 const MONGOURL = process.env.MONGO_URI;
+const {notFound,errorHandler} = require('./middlwares/errorHandler')
 const AuthRouter = require("./route/authRoute");
 const UserRouter = require("./route/userRoute");
 const AdminRouter=require('./route/adminRoute');
@@ -35,6 +36,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(AuthRouter);
 app.use(UserRouter);
 app.use(AdminRouter);
+
+app.use(notFound)
+app.use(errorHandler);
 
 mongooose
   .connect(MONGOURL)

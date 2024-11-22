@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Event = require("../../model/EventSchema");
 const User = require("../../model/userModel");
+
 const showEvents = async (req, res) => {
   try {
     const event = await Event.find();
