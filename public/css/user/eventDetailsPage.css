@@ -82,8 +82,10 @@ body {
   background-color:green;
 }
 .footer form {
-  width: 60%;
+  width: 80%;
   height: 40px;
-
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
 }
 

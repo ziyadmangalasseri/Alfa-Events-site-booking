@@ -12,7 +12,7 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@200;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/css/user/upcomingEvents.css" />
+    <link rel="stylesheet" href="/css/user/bookedEventsPage.css" />
   </head>
   <body>
     <div
@@ -23,38 +23,33 @@
           <h3 class="text-center mb-4">Event List</h3>
         </div>
         <div class="details-div">
-          <div id="eventList">
-            <% if (Array.isArray(event) && event.length > 0) { %> <%
-            event.forEach(function(event, index){ %>
-            <a
-              href="/usereventDetails/<%= event._id %>"
-              class="text-decoration-none text-white"
-            >
-              <div
-                class="event-item d-flex justify-content-between align-items-center mb-3 p-3"
-              >
-                <div>
-                  <!-- Wrap event place and date in clickable links -->
-                  <h6 class="place-text"><%= event.place %></h6>
-                  <h6 class="date-text"><%= event.formattedDate %></h6>
-                </div>
+            <div id="eventList">
+                <% if (events && events.length > 0) { %>
+                  <% events.forEach((event) => { %>
+                    <a
+                      href="/userbookedeventDetails/<%= event._id %>"
+                      class="text-decoration-none text-dark"
+                    ><div
+                    class="event-item d-flex justify-content-between align-items-center mb-3 p-3"
+                  >
+                    <div>
+                      <!-- Wrap event place and date in clickable links -->
+                      <h6 class="place-text"><%= event.place %></h6>
+                      <h6 class="date-text"><%= event.formattedDate %></h6>
+                    </div>
+                  </div>
+                    </a>
+                  <% }); %>
+                <% } else { %>
+                  <p class="text-center">No events booked yet.</p>
+                <% } %>
               </div>
-            </a>
-            <% }) %> <% } else { %>
-            <p>No events available.</p>
-            <% } %>
-          </div>
         </div>
         <div class="footer">
-          <button onclick="goBack()">Home</button>
+          <a href="/home"><button>Home</button></a>
         </div>
       </div>
     </div>
-    <script>
-      function goBack(){
-        window.history.back();
-      }
-    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </body>

@@ -9,61 +9,46 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@200;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/css/user/profile.css" />
+    <link rel="stylesheet" href="profile.css" />
   </head>
   <body>
     
     <div class="container d-flex align-items-center justify-content-center min-vh-100">
       <div class="content-box">
         <div class="card-header text-center mb-3">
-          <img class="alfa-logo img-fluid" src="/images/ALFA_EVENT_LOGO1.png" alt="ALFA Event Logo" />
+          <img class="alfa-logo img-fluid" src="/public/images/ALFA_EVENT_LOGO.png" alt="ALFA Event Logo" />
         </div>
         <div class="details-div">
           <ul class="list-unstyled">
             <li class="info-item">
-              <span class="label">Name</span>
-              <span class="value text-white">: <%= users.name %></span>
+              <span class="label">Name   </span>
+              <span class="value text-white">: [Name Value]</span>
             </li>
             <li class="info-item">
-              <span class="label">User Id</span>
-              <span class="value text-white">: <%= users.userId %></span>
-            </li>
-            <li class="info-item">
-              <span class="label">Phone Number</span>
-              <span class="value text-white">: <%= users.number %></span>
+              <span class="label">User Id  </span>
+              <span class="value text-white">: [User Id Value]</span>
             </li>
             <li class="info-item">
               <span class="label">Place</span>
-              <span class="value text-white">: <%= users.place %></span>
+              <span class="value text-white">: [Place Value]</span>
             </li>
             <li class="info-item">
               <span class="label">Joining Date</span>
-              <span class="value text-white">: <%= users.JoiningDate.toDateString() %></span>
+              <span class="value text-white">: [Joining Date Value]</span>
             </li>
             <li class="info-item">
               <span class="label">Date Of Birth</span>
-              <span class="value text-white">: <%= users.DateOfBirth.toDateString() %></span>
+              <span class="value text-white">: [Date of Birth Value]</span>
             </li>
             <li class="info-item">
               <span class="label">Blood Group</span>
-              <span class="value text-white">: <%= users.BloodGroup %></span>
+              <span class="value text-white">: [Blood Group Value]</span>
             </li>
           </ul>
           
-          
-        </div>
-        <div class="footer">
-          <button onclick="goBack()">Home</button>
         </div>
       </div>
     </div>
   
   </body>
 </html>
-
-
-<script>
-  function goBack(){
-    window.history.back();
-  }
-</script>

@@ -1,0 +1,77 @@
+body {
+    font-family: Arial, sans-serif;
+    background: url('/public/images/pexels-ywanphoto-57980.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
+}
+
+.content-box {
+    height: 600px;
+    width: 350px;
+    max-width: 600px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+    color: white;
+    font-family: monospace;
+    
+}
+
+.card-header {
+    padding: 30px;
+}
+.alfa-logo {
+    width: 120px;
+}
+
+.details-div {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 0px;
+    padding: 30px;
+    text-align: center;
+    height: 60%;
+    display: flex;
+    align-items: center;
+    
+}
+.details-div ul{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: start;
+}
+.details-div ul li{
+    font-size: small;
+}
+.ul.list-unstyled {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .info-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  .label {
+    width: 150px; /* Adjust width as needed for alignment */
+    font-weight: bold;
+    color: white;
+    text-align: start;
+    padding-right: 10px; /* Space between label and value */
+  }
+  
+  .value {
+    color: white;
+    /* margin-right: 0px; */
+  }
+  
+
+
+
+
+

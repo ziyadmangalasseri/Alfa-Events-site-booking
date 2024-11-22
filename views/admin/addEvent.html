@@ -12,7 +12,7 @@
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@200;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/css/admin/addEvent.css" />
+    <link rel="stylesheet" href="/public/css/admin/addEvent1.css" />
   </head>
   <body>
     <div
@@ -23,7 +23,8 @@
           <h3 class="text-center mb-4">Create New Event</h3>
         </div>
         <form id="addEventForm" class="add-form">
-          <div class="details-div">
+        <div class="details-div">
+            <!-- Form fields as list items -->
             <ul class="list-unstyled">
               <li class="mb-3">
                 <label class="form-label">Place</label>
@@ -104,62 +105,13 @@
               </li>
             </ul>
           </div>
-          <div class="footer">
-            <button
-              type="button"
-              class="cancel-btn"
-              onclick="cancelEdit()"
-              id="cancelBtn"
-            >
-              Cancel
-            </button>
-            <button type="button" class="creat-event-btn" id="Eventaddbtn">
+          <div class="button-div">
+            <button type="submit" class="btn" id="button">
               Create Event
             </button>
           </div>
         </form>
       </div>
     </div>
-    <script>
-      function cancelEdit() {
-        window.location.href = "/showEventPage";
-      }
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <script>
-      // Submit Event Form
-      document
-        .getElementById("Eventaddbtn")
-        .addEventListener("click", async () => {
-          const eventData = Object.fromEntries(
-            new FormData(document.getElementById("addEventForm"))
-          );
-          try {
-            const response = await fetch("/addEvent", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(eventData),
-            });
-            const result = await response.json();
-
-            Swal.fire({
-              icon: result.success ? "success" : "error",
-              title: result.success ? "Success" : "Error",
-              text: result.message || "Something went wrong.",
-            }).then(() => {
-              if (result.redirectUrl) window.location.href = result.redirectUrl;
-            });
-          } catch (error) {
-            Swal.fire(
-              "Error",
-              "An error occurred while creating the event.",
-              "error"
-            );
-            console.error(error);
-          }
-        });
-    </script>
   </body>
 </html>
