@@ -1,5 +1,5 @@
 const express = require("express");
-const {isAuthenticated}  = require("../middleware/isAuthenticated");
+const {adminisAuthenticated}  = require("../middleware/isAuthenticated");
 
 const router = express.Router();
 const {
@@ -24,27 +24,27 @@ const {
 
 const { dashboard } = require("../controller/AdminCtrl/adminCtrl");
 
-router.get("/addEmployee",isAuthenticated, renderEmployeeForm);
-router.post("/addEmployee",isAuthenticated, addEmployee);
-router.get("/showemployeespage",isAuthenticated,renderallemployees);
-router.get("/showEmployeeDetails/:id",isAuthenticated, employeeDetails);
-router.get("/editEmployee/:id",isAuthenticated,editEmployeePage)
-router.put("/editEmployee/:id", isAuthenticated,editEmployee);
-router.delete("/deleteEmployee/:id",isAuthenticated,deleteEmployee);
+router.get("/addEmployee",adminisAuthenticated, renderEmployeeForm);
+router.post("/addEmployee",adminisAuthenticated, addEmployee);
+router.get("/showemployeespage",adminisAuthenticated,renderallemployees);
+router.get("/showEmployeeDetails/:id",adminisAuthenticated, employeeDetails);
+router.get("/editEmployee/:id",adminisAuthenticated,editEmployeePage)
+router.put("/editEmployee/:id", adminisAuthenticated,editEmployee);
+router.delete("/deleteEmployee/:id",adminisAuthenticated,deleteEmployee);
 
-router.get("/dashboard",isAuthenticated, dashboard);
+router.get("/dashboard",adminisAuthenticated, dashboard);
 
-router.get("/addEventPage",isAuthenticated, AddEventPage);
-router.post("/addEvent",isAuthenticated, AddEvent);
+router.get("/addEventPage",adminisAuthenticated, AddEventPage);
+router.post("/addEvent",adminisAuthenticated, AddEvent);
 
-router.get("/eventDetail/:id",isAuthenticated, EventdetailsPage);
-router.get("/showEventPage",isAuthenticated, ShowEventPage);
+router.get("/eventDetail/:id",adminisAuthenticated, EventdetailsPage);
+router.get("/showEventPage",adminisAuthenticated, ShowEventPage);
 
-router.get("/event/edit/:id",isAuthenticated, EditEventPage);
-router.post("/event/edit/:id",isAuthenticated, EditEvent);
-router.delete('/event/:eventId/employee/:userId',isAuthenticated, removeEmployeeFromEvent);
+router.get("/event/edit/:id",adminisAuthenticated, EditEventPage);
+router.post("/event/edit/:id",adminisAuthenticated, EditEvent);
+router.delete('/event/:eventId/employee/:userId',adminisAuthenticated, removeEmployeeFromEvent);
 
 
-router.delete("/event/delete/:id",isAuthenticated, DeleteEvent);
+router.delete("/event/delete/:id",adminisAuthenticated, DeleteEvent);
 
 module.exports = router;
