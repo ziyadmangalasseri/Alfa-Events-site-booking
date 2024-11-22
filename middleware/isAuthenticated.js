@@ -1,4 +1,5 @@
  const isAuthenticated = (req, res, next) => {
+
   if (req.session.isLoggedIn) {
     next(); // Proceed to the next middleware or route handler
   } else {
