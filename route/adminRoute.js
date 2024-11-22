@@ -17,6 +17,7 @@ const {
   editEmployeePage,
   editEmployee,
   deleteEmployee,
+  removeEmployeeFromEvent
 } = require("../controller/AdminCtrl/EmployeeCtrl");
 
 const { dashboard } = require("../controller/AdminCtrl/adminCtrl");
@@ -39,6 +40,8 @@ router.get("/showEventPage", ShowEventPage);
 
 router.get("/event/edit/:id", EditEventPage);
 router.post("/event/edit/:id", EditEvent);
+router.delete('/event/:eventId/employee/:userId', removeEmployeeFromEvent);
+
 
 router.delete("/event/delete/:id", DeleteEvent);
 
