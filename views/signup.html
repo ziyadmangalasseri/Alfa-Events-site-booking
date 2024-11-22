@@ -1,0 +1,132 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alfa Events Login</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/login.css" />
+  </head>
+  <body>
+    <div
+      class="container d-flex align-items-center justify-content-center min-vh-100"
+    >
+      <div class="content-box">
+        <div class="login-box-header text-center mb-3">
+          <img
+            class="alfa-logo img-fluid"
+            src="/images/ALFA_EVENT_LOGO.png"
+            alt="ALFA Event Logo"
+          />
+        </div>
+        <div class="login-box-form">
+          <form id="singup-form">
+            <div class="input-parent-div">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label for="userId">User ID</label>
+                <input type="text" id="userId" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label for="number">Number</label>
+                <input type="text" id="number" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label for="joiningDate">Joining Date</label>
+                <input type="date" id="joiningDate" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label for="dateOfBirth">Date of Birth</label>
+                <input type="date" id="dateOfBirth" class="form-control" />
+              </div>
+              <div class="form-group">
+                <label for="bloodGroup">Blood Group</label>
+                <input type="text" id="bloodGroup" class="form-control" />
+              </div>
+              <p id="showerror" style="display: none; color: red; text-align: center; margin-top: 0px;">
+                Invalid details. Please try again.
+              </p>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-dark btn-block" id="signup-button">
+                Sign Up
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+      const form = document.getElementById("singup-form");
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        // Collecting input values
+        const userId = document.getElementById("userId").value;
+        const password = document.getElementById("password").value;
+        const name = document.getElementById("name").value;
+        const number = document.getElementById("number").value;
+        const joiningDate = document.getElementById("joiningDate").value;
+        const dateOfBirth = document.getElementById("dateOfBirth").value;
+        const bloodGroup = document.getElementById("bloodGroup").value;
+
+        // Validate if required fields are filled
+        if (userId && password) {
+          console.log('Sign-in fetch started');
+          fetch("http://localhost:3000/userlogin", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              userId: userId,
+              password: password,
+              name: name,
+              number: number,
+              joiningDate: joiningDate,
+              dateOfBirth: dateOfBirth,
+              bloodGroup: bloodGroup
+            }),
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error(`Network response was not ok (status ${response.status})`);
+              }
+              return response.json();
+            })
+            .then((data) => {
+              if (!data.success) {
+                document.getElementById("showerror").style.display = "block";
+              } else {
+                window.location.href = data.redirectUrl;
+              }
+            })
+            .catch((err) => {
+              console.error("Error message:", err.message);
+              document.getElementById("showerror").style.display = "block";
+              document.getElementById("showerror").textContent = "An error occurred. Please try again later.";
+            });
+        } else {
+          document.getElementById("showerror").style.display = "block";
+          document.getElementById("showerror").textContent = "User ID and password are required.";
+        }
+      });
+    </script>
+  </body>
+</html>
