@@ -1,11 +1,7 @@
 const userModel = require("../../model/userModel");
 
 const homePage = (req, res) => {
-  if (req.session.isLoggedIn) {
     res.render("user/home");
-  }else{
-    res.redirect("/");
-  }
   console.log(req.session.isLoggedIn);
   
 };
