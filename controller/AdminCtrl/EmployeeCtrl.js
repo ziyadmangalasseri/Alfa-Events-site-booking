@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const EmployeeModel = require("../../model/userModel");
 const bcrypt = require("bcrypt");
+const Event = require("../../model/EventSchema");
 
 const renderEmployeeForm = (req, res) => {
   res.render("admin/addEmployee");
@@ -171,6 +172,51 @@ const deleteEmployee = async (req, res) => {
   }
 };
 
+const removeEmployeeFromEvent = async (req, res) => {
+  try {
+    const { eventId, userId } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(eventId) || !mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ error: "Invalid Event ID or User ID format" });
+    }
+
+    // Check if event exists
+    const event = await Event.findById(eventId);
+    if (!event) {
+      return res.status(404).json({ error: "Event not found" });
+    }
+
+    // Check if user exists
+    const user = await EmployeeModel.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Remove userId from event's currentEmployers
+    await Event.findByIdAndUpdate(
+      eventId,
+      { $pull: { currentEmployers: userId } },
+      { new: true }
+    );
+
+    // Remove eventId from user's myEvents
+    await EmployeeModel.findByIdAndUpdate(
+      userId,
+      { $pull: { myEvents: eventId } },
+      { new: true }
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "Employee removed from event successfully",
+    });
+  } catch (error) {
+    console.error("Error in removeEmployeeFromEvent:", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+
 module.exports = {
   renderEmployeeForm,
   addEmployee,
@@ -179,4 +225,5 @@ module.exports = {
   editEmployee,
   editEmployeePage,
   deleteEmployee,
+  removeEmployeeFromEvent
 };
