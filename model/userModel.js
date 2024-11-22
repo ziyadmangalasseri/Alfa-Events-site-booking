@@ -1,20 +1,4 @@
-/**
- * 
- * {
-  "_id": {
-    "$oid": "672ddfd0321e6de463d46076"
-  },
-  "name": "ziyad",
-  "userId": "1001",
-  "password":"$2b$10$bqQq5XV2LZOtaWsYV6LJxOmHWrPOsfnXPnEpQj/n6bQ706CUZ63r.",
-  "number":"8111807089",
-  "place": "pallippurma",
-  "joiningDate": "08/11/2024",
-  "dateOfBirth": "10/20/2004",
-  "bloodGroup": "A+",
-  "isAdmin": true
-}
- */
+
 const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
   name: {

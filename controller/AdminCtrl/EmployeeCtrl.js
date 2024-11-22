@@ -76,9 +76,9 @@ const employeeDetails = async (req, res) => {
       return res.status(404).send("Employee not found");
     }
 
-    // Format the dates
+   
     const formattedEmployee = {
-      ...employee._doc, // Spread original employee data
+      ...employee._doc,
       JoiningDate: new Date(employee.JoiningDate).toISOString().split("T")[0],
       DateOfBirth: new Date(employee.DateOfBirth).toISOString().split("T")[0],
     };
@@ -95,7 +95,7 @@ const editEmployeePage = async (req, res) => {
     if (employeeId) {
       const employee = await EmployeeModel.findById(employeeId);
       const formattedEmployee = {
-        ...employee._doc, // Spread original employee data
+        ...employee._doc,
         JoiningDate: new Date(employee.JoiningDate).toISOString().split("T")[0],
         DateOfBirth: new Date(employee.DateOfBirth).toISOString().split("T")[0],
       };
@@ -118,7 +118,7 @@ const editEmployeePage = async (req, res) => {
 
 const editEmployee = async (req, res) => {
   try {
-    const employeeId = req.params.id; // Extract employee ID from the URL
+    const employeeId = req.params.id;
     if (!employeeId) {
       return res.status(400).json({ error: "Invalid Employee ID" });
     }
@@ -148,15 +148,13 @@ const editEmployee = async (req, res) => {
   }
 };
 
-// Export or attach the route handler to your Express app
 const deleteEmployee = async (req, res) => {
   try {
-    const employeeId = req.params.id; // Extract the employee ID from the URL
+    const employeeId = req.params.id; 
     if (!employeeId) {
       return res.status(400).json({ error: "Invalid Employee ID" });
     }
 
-    // Find and delete the employee
     const deletedEmployee = await EmployeeModel.findByIdAndDelete(employeeId);
 
     if (!deletedEmployee) {
@@ -180,26 +178,22 @@ const removeEmployeeFromEvent = async (req, res) => {
       return res.status(400).json({ error: "Invalid Event ID or User ID format" });
     }
 
-    // Check if event exists
     const event = await Event.findById(eventId);
     if (!event) {
       return res.status(404).json({ error: "Event not found" });
     }
 
-    // Check if user exists
     const user = await EmployeeModel.findById(userId);
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
 
-    // Remove userId from event's currentEmployers
     await Event.findByIdAndUpdate(
       eventId,
       { $pull: { currentEmployers: userId } },
       { new: true }
     );
 
-    // Remove eventId from user's myEvents
     await EmployeeModel.findByIdAndUpdate(
       userId,
       { $pull: { myEvents: eventId } },

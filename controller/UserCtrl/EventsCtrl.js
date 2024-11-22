@@ -127,8 +127,7 @@ const bookEvent = async (req, res) => {
   try {
     const eventId = req.params.id;
     const userId = req.session?.userDataId;
-
-    // Debugging logs
+    
     console.log("User ID:", userId);
     console.log("Event ID:", eventId);
 
@@ -141,8 +140,7 @@ const bookEvent = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(eventId)) {
       return res.status(400).json({ error: "Invalid Event ID format" });
     }
-
-    // Check if `eventId` and `userId` exist and have correct types
+    
     const event = await Event.findById(eventId);
     if (!event) {
       return res.status(404).json({ error: "Event not found" });
@@ -153,16 +151,15 @@ const bookEvent = async (req, res) => {
       return res.status(404).json({ error: "User not found" });
     }
 
-    // Update both User and Event documents
     await Event.findByIdAndUpdate(
       eventId,
-      { $addToSet: { currentEmployers: userId } }, // Avoid duplicates
+      { $addToSet: { currentEmployers: userId } }, 
       { new: true }
     );
 
     await User.findByIdAndUpdate(
       userId,
-      { $addToSet: { myEvents: eventId } }, // Avoid duplicates
+      { $addToSet: { myEvents: eventId } },
       { new: true }
     );
 
