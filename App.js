@@ -1,53 +1,66 @@
 const express = require("express");
-const app = express();
+const session = require("express-session");
+const mongoose = require("mongoose");
 const dotenv = require("dotenv").config();
-const mongooose = require("mongoose");
 const bcrypt = require("bcrypt");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const session = require("express-session");
-const PORT = process.env.PORT || 5000;
-const MONGOURL = process.env.MONGO_URI;
-const {notFound,errorHandler} = require('./middlwares/errorHandler')
+
+// Custom middleware
+const { notFound, errorHandler } = require("./middleware/errorHandler");
+const { isAuthenticated } = require("./middleware/isAuthenticated");
+
+// Routers
 const AuthRouter = require("./route/authRoute");
 const UserRouter = require("./route/userRoute");
-const AdminRouter=require('./route/adminRoute');
+const AdminRouter = require("./route/adminRoute");
 
+const app = express();
+const PORT = process.env.PORT || 5000;
+const MONGOURL = process.env.MONGO_URI;
 
+// EJS view engine setup
 app.set("view engine", "ejs");
 app.set("views", "views");
 
-//  Session configuration
-app.use(session({
-  secret: 'my secret key',
+// Session configuration
+app.use(
+  session({
+    secret: "my secret key",
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false } 
-}))
+    cookie: { secure: false }, // Use true if HTTPS is enabled
+  })
+);
+
+// Middleware
 app.use(express.static("public"));
 app.use(express.json());
 app.use(cors());
-
-// Body-parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// Authentication middleware
+// app.use(isAuthenticated);
 
+// Route handlers
 app.use(AuthRouter);
 app.use(UserRouter);
 app.use(AdminRouter);
 
-app.use(notFound)
+// Error handlers
+app.use(notFound);
 app.use(errorHandler);
 
-mongooose
+// MongoDB Connection and Server Start
+mongoose
   .connect(MONGOURL)
   .then(() => {
-    console.log('mongodb connection successfull');
+    console.log("MongoDB connection successful");
     app.listen(PORT, () => {
-      console.log(`server is running http://localhost:${PORT}`);
+      console.log(`Server running at http://localhost:${PORT}`);
     });
   })
   .catch((err) => {
-    console.log(err);
-  });
+    console.error("MongoDB connection error:", err.message);
+  });
