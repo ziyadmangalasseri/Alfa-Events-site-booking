@@ -1,5 +1,5 @@
 const express = require("express");
-const  {isAuthenticated}  = require("../middleware/isAuthenticated");
+const  {userisAuthenticated}  = require("../middleware/isAuthenticated");
 
 const router = express.Router();
 const {
@@ -14,14 +14,14 @@ const {
   userBookedEventDetails,
 } = require("../controller/UserCtrl/EventsCtrl");
 
-router.get("/home",isAuthenticated, homePage);
-router.get("/userProfile",isAuthenticated,profilePageDetails);
+router.get("/home",userisAuthenticated, homePage);
+router.get("/userProfile",userisAuthenticated,profilePageDetails);
 
-router.get("/upcomingEvents",isAuthenticated, showEvents);
-router.get("/usereventDetails/:id",isAuthenticated, userEventDetails);
-router.post("/bookEvent/:id",isAuthenticated, bookEvent);
-router.get("/userbookedeventDetails/:id",isAuthenticated,userBookedEventDetails)
+router.get("/upcomingEvents",userisAuthenticated, showEvents);
+router.get("/usereventDetails/:id",userisAuthenticated, userEventDetails);
+router.post("/bookEvent/:id",userisAuthenticated, bookEvent);
+router.get("/userbookedeventDetails/:id",userisAuthenticated,userBookedEventDetails)
 
-router.get("/bookedEvents",isAuthenticated,bookedEvents);
+router.get("/bookedEvents",userisAuthenticated,bookedEvents);
 
 module.exports = router;

@@ -89,17 +89,24 @@ const EditEventPage = async (req, res) => {
   try {
     const eventId = req.params.id;
     const event = await Event.findById(eventId);
+
     if (!event) {
       return res
         .status(400)
-        .json({ success: false, message: "Event is not found" });
+        .json({ success: false, message: "Event not found" });
     }
+
+    // Format date and expiration time for input fields
+    event.formattedDate = event.date.toISOString().split("T")[0]; // YYYY-MM-DD for <input type="date">
+    event.formattedExpirationTime = event.expirationTime.toISOString().slice(0, 16); // YYYY-MM-DDTHH:MM for <input type="datetime-local">
+
     res.render("admin/editEventPage", { event });
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ success: false, message: "Internal server error" });
   }
 };
+
 
 const AddEvent = async (req, res) => {
   const adminId = req.session.userDataId;

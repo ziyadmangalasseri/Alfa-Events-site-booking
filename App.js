@@ -8,7 +8,7 @@ const cors = require("cors");
 
 // Custom middleware
 const { notFound, errorHandler } = require("./middleware/errorHandler");
-const { isAuthenticated } = require("./middleware/isAuthenticated");
+// const { isAuthenticated } = require("./middleware/isAuthenticated");
 
 // Routers
 const AuthRouter = require("./route/authRoute");

@@ -47,9 +47,9 @@ const createAccount = async (req, res) => {
     await newUser.save();
 
 
-    req.session.isLoggedIn = true;
-    req.session.userId = newUser.userId;
-    req.session.userDataId = newUser._id
+    // req.session.isLoggedIn = true;
+    // req.session.userId = newUser.userId;
+    // req.session.userDataId = newUser._id
 
     res.status(201).json({
       success: true,
@@ -103,18 +103,27 @@ const userLogin = async (req, res) => {
 
     console.log("Password verified");
 
-    req.session.isLoggedIn = true;
-    req.session.userId = findUser.userId;
-    req.session.userDataId = findUser._id
-      
+   
 
     const response = {
       success: true,
-      message: findUser.isAdmin
-        ? "Admin login successfully"
-        : "User login successfully",
-      redirectUrl: findUser.isAdmin ? "/dashboard" : "/home",
     };
+      if(findUser.isAdmin){
+        req.session.adminisLoggedIn = true;
+        req.session.userId = findUser.userId;
+        req.session.userDataId = findUser._id
+          
+        response.message="Admin login successfully";
+        response.redirectUrl = "/dashboard"
+      }else{
+        req.session.userisLoggedIn = true;
+        req.session.userId = findUser.userId;
+        req.session.userDataId = findUser._id
+          
+        response.message = "User login successfully";
+        response.redirectUrl = "/home"
+      }
+    
     res.status(200).json(response);
   } catch (error) {
     console.error("Error logging in:", error.message);
