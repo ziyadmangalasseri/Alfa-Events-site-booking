@@ -46,26 +46,12 @@ const createAccount = async (req, res) => {
 
     await newUser.save();
 
-
-    // req.session.isLoggedIn = true;
-    // req.session.userId = newUser.userId;
-    // req.session.userDataId = newUser._id
-
     res.status(201).json({
       success: true,
       message: "Account created successfully!",
       redirectUrl: "/home",
     });
   } catch (error) {
-    if (error.code === 11000) {
-      const duplicateField = Object.keys(error.keyValue)[0];
-      const errorMessage =
-        duplicateField === "userId"
-          ? "User ID already exists."
-          : "Phone number already in use.";
-      return res.status(400).json({ success: false, message: errorMessage });
-    }
-
     console.error("Error creating account:", error.message);
     res.status(500).json({
       success: false,
