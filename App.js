@@ -54,7 +54,7 @@ app.use(errorHandler);
 
 // MongoDB Connection and Server Start
 mongoose
-  .connect(MONGOURL)
+  .connect(process.env.MONGO_URI)
   .then(() => {
     console.log("MongoDB connection successful");
     app.listen(PORT, () => {
@@ -64,3 +64,4 @@ mongoose
   .catch((err) => {
     console.error("MongoDB connection error:", err.message);
   });
+

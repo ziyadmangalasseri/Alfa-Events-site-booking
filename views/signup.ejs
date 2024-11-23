@@ -82,52 +82,36 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script>
       const form = document.getElementById("singup-form");
-      form.addEventListener("submit", (event) => {
+      form.addEventListener("submit", async (event) => {
         event.preventDefault();
 
-        const userId = document.getElementById("userId").value;
-        const password = document.getElementById("password").value;
-        const name = document.getElementById("name").value;
-        const number = document.getElementById("number").value;
-        const place = document.getElementById("place").value;
-        const JoiningDate = document.getElementById("joiningDate").value;
-        const DateofBirth = document.getElementById("dateOfBirth").value;
-        const bloodGroup = document.getElementById("bloodGroup").value;
+        const formData = {
+          userId: document.getElementById("userId").value,
+          password: document.getElementById("password").value,
+          name: document.getElementById("name").value,
+          number: document.getElementById("number").value,
+          place: document.getElementById("place").value,
+          JoiningDate: document.getElementById("joiningDate").value,
+          DateofBirth: document.getElementById("dateOfBirth").value,
+          bloodGroup: document.getElementById("bloodGroup").value,
+        };
 
-        if (userId && password) {
-          fetch("/createAccount", {
+        try {
+          const response = await fetch("/createAccount", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              userId,
-              password,
-              name,
-              number,
-              place,
-              JoiningDate,
-              DateofBirth,
-              bloodGroup,
-            }),
-          })
-            .then((response) => {
-              if (!response.ok) throw response;
-              return response.json();
-            })
-            .then((data) => {
-              if (data.success) window.location.href = data.redirectUrl;
-              else throw new Error(data.message);
-            })
-            .catch((err) => {
-              err.json().then((errorMsg) => {
-                document.getElementById("showerror").style.display = "block";
-                document.getElementById("showerror").textContent =
-                  errorMsg.message || "An error occurred. Please try again.";
-              });
-            });
-        } else {
+            body: JSON.stringify(formData),
+          });
+
+          if (!response.ok) throw await response.json();
+          const data = await response.json();
+
+          if (data.success) window.location.href = data.redirectUrl;
+          else throw new Error(data.message);
+        } catch (error) {
           document.getElementById("showerror").style.display = "block";
           document.getElementById("showerror").textContent =
-            "User ID and password are required.";
+            error.message || "An error occurred.";
         }
       });
     </script>
