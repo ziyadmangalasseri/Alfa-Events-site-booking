@@ -65,27 +65,44 @@ body {
 
 .footer {
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+}
+.footer div {
+  width: 40%;
+  padding: 5px;
+}
+#cancel-btn {
+  color: white;
+  width: 100%;
+  background-color: rgb(88, 103, 2);
+}
+#book-btn {
+  width: 100%;
+  color: white;
+  background-color: rgb(0, 111, 0);
+}
+/* .event-book-btn{
+  display: flex;
   justify-content: center;
   align-items: center;
   padding: 20px;
-}
+} */
+/* .btn {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  border: none;
+  background-color: rgb(0, 71, 0);
+  color: white;
+} */
 
-.footer form button{
-    width: 100%;
-    height: 100%;
-    border-radius: 8px;
-    border: none;
-    background-color: rgb(0, 71, 0);
-    color: white;
-}
-.footer form button:active{
-  background-color:green;
-}
-.footer form {
+/* .footer form {
   width: 80%;
   height: 40px;
   display: flex;
   flex-direction: row;
   gap: 5px;
-}
-
+} */
