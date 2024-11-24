@@ -25,17 +25,18 @@
             <% let count = 0; %>
             <% if (employees.length > 0) { %> <% employees.forEach((employee) =>
             { %>
-              <% count++ %>
-              <a href="/showEmployeeDetails/<%= employee._id %>" class="">
-                <div class="employee-row d-flex justify-content-between align-items-center mb-3 p-3">
-            <div class="employee-div">
-              <!-- Wrap event place and date in clickable links -->
-                <h6 class="name-text"><%= count %>. <%= employee.name %></h6>
-                <h6 class="id-text">ID : <%= employee.userId %></h6>
-              </div>
-            
-            </div>
-          </a>
+             
+                <% count++ %>
+                <a href="/showEmployeeDetails/<%= employee._id %>" class="">
+                  <div class="employee-row d-flex justify-content-between align-items-center mb-3 p-3">
+                    <div class="employee-div">
+                      <!-- Wrap event place and date in clickable links -->
+                      <h6 class="name-text"><%= count %>. <%= employee.name %></h6>
+                      <h6 class="id-text">ID : <%= employee.userId %></h6>
+                    </div>
+                    
+                  </div>
+                </a>
             <% }) %> <% } else { %>
             <p>No Employees is not available.</p>
             <% } %>

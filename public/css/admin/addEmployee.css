@@ -76,13 +76,20 @@ body {
     display: flex;
     justify-content: center;
     padding: 15px;
+    gap: 5px;
   }
   #Eventaddbtn {
     background-color: rgb(8, 62, 6);
     color: white;
-    width: 50%; 
+    width: 40%; 
     height: 40px;
     /* margin-top: 15px; */
+  }
+  #cancelBtn{
+    background-color: rgb(94, 106, 0);
+    color: white;
+    width: 40%; 
+    height: 40px;
   }
 
   .password-li{
