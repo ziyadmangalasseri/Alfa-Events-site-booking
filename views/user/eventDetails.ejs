@@ -62,20 +62,24 @@
                   >: <%= event.employerLimit %></span
                 >
               </li>
-              <li class="info-item">
-                <span class="label">Expiration Time</span>
-                <span class="value text-white"
-                  >: <%= event.formattedexpirationTime %></span
-                >
-              </li>
             </ul>
           </div>
         </div>
         <div class="footer">
-          <form id="event-book" class="event-book-btn">
-            <button style="background-color: rgb(97, 89, 0);" onclick="goBack()">Cancel</button>
-            <button>Book</button>
-          </form>
+          <div>
+            <button
+              class="btn"
+              id="cancel-btn"
+              onclick="goBack()"
+            >
+              Cancel
+            </button>
+          </div>
+          <div>
+            <form id="event-book">
+              <button id="book-btn" class="btn">Book</button>
+            </form>
+          </div>
         </div>
         <% } else { %>
         <p>Event Details is not Avialable</p>
@@ -83,7 +87,7 @@
       </div>
     </div>
     <script>
-      function goBack(){
+      function goBack() {
         window.history.back();
       }
     </script>
