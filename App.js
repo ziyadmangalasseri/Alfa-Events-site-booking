@@ -6,11 +6,8 @@ const bcrypt = require("bcrypt");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
-// Custom middleware
 const { notFound, errorHandler } = require("./middleware/errorHandler");
-// const { isAuthenticated } = require("./middleware/isAuthenticated");
 
-// Routers
 const AuthRouter = require("./route/authRoute");
 const UserRouter = require("./route/userRoute");
 const AdminRouter = require("./route/adminRoute");
