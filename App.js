@@ -5,13 +5,13 @@ const dotenv = require("dotenv").config();
 const bcrypt = require("bcrypt");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const MongoStore = require("connect-mongo");
 
 const { notFound, errorHandler } = require("./middleware/errorHandler");
 
 const AuthRouter = require("./route/authRoute");
 const UserRouter = require("./route/userRoute");
 const AdminRouter = require("./route/adminRoute");
-const MongoStore = require("connect-mongo");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -26,11 +26,19 @@ app.use(
   session({
     secret: "my secret key",
     resave: false,
-    saveUninitialized: true,
-    store:MongoStore.create({
-      mongoUrl:MONGOURL,
+    saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: MONGOURL,
+      collectionName: "sessions",
+    }).on("error", (error) => {
+      console.error("Session store error:", error);
     }),
-    cookie: { maxAge: 1000*60*60*24, }, // Use true if HTTPS is enabled
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24,
+      secure: process.env.NODE_ENV === "production",
+      httpOnly: true,
+      sameSite: "strict",
+    },
   })
 );
 
@@ -55,7 +63,7 @@ app.use(errorHandler);
 
 // MongoDB Connection and Server Start
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(MONGOURL)
   .then(() => {
     console.log("MongoDB connection successful");
     app.listen(PORT, () => {
@@ -66,5 +74,8 @@ mongoose
     console.error("MongoDB connection error:", err.message);
   });
 
-
-  
+// Handle uncaught errors
+process.on("unhandledRejection", (err) => {
+  console.error("Unhandled rejection:", err.message);
+  process.exit(1);
+});
