@@ -81,6 +81,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script>
+      const API_URL = process.env.API_URL;
       const togglePassword = document.getElementById("togglePassword");
       const passwordInput = document.getElementById("password");
 
@@ -106,7 +107,7 @@
 
         if (userId && password) {
           console.log("signin fetch started");
-          fetch("https://alfa-events-site-booking.onrender.com/userlogin", {
+          fetch(`${API_URL}/userlogin`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
