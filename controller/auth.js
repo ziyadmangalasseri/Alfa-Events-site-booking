@@ -166,7 +166,7 @@ const userLogin = async (req, res) => {
         req.session.userDataId = findUser._id
           
         response.message = "User login successfully";
-        response.redirectUrl = "https://alfa-events-site-booking.onrender.com/home"
+        response.redirectUrl = "/home"
       }
     
     res.status(200).json(response);
