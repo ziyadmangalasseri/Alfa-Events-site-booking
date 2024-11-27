@@ -14,6 +14,7 @@ const { notFound, errorHandler } = require("./middleware/errorHandler");
 const AuthRouter = require("./route/authRoute");
 const UserRouter = require("./route/userRoute");
 const AdminRouter = require("./route/adminRoute");
+const MongoStore = require("connect-mongo");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -29,7 +30,10 @@ app.use(
     secret: "my secret key",
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }, // Use true if HTTPS is enabled
+    store:MongoStore.create({
+      mongoUrl:MONGOURL,
+    }),
+    cookie: { maxAge: 1000*60*60*24, }, // Use true if HTTPS is enabled
   })
 );
 
