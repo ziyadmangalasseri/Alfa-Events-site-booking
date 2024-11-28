@@ -21,7 +21,7 @@ const PORT = process.env.PORT || 5000;
 
 // EJS view engine setup
 app.set("view engine", "ejs");
-app.set("views", "views");
+app.set("views",path.join(__dirname,"views"));
 
 // Session configuration
 app.use(
