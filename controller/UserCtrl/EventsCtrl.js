@@ -191,6 +191,7 @@ const bookedEvents = async (req, res) => {
       formattedDate: event.date.toLocaleDateString(),
       reportingTime: event.reportingTime,
       exitTime: event.exitTime,
+      expirationTime: event.expirationTime,
     }));
 
     res.render("user/bookedEventsPage", { events });

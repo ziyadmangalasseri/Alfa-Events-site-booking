@@ -34,7 +34,7 @@
             <div id="eventList">
                 <% if (events && events.length > 0) { %>
                   <% events.forEach((event) => { %>
-                   <% if ( new Date() < new Date(event.expirationTime) ) { %>
+                   <% if (!event.expirationTime || new Date() < new Date(event.expirationTime) ) { %>
                     <a
                       href="/userbookedeventDetails/<%= event._id %>"
                       class="text-decoration-none text-dark"
