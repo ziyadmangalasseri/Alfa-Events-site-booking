@@ -128,8 +128,8 @@ const bookEvent = async (req, res) => {
     const eventId = req.params.id;
     const userId = req.session?.userDataId;
     
-    console.log("User ID:", userId);
-    console.log("Event ID:", eventId);
+    // console.log("User ID:", userId);
+    // console.log("Event ID:", eventId);
 
     if (!userId || !eventId) {
       return res
