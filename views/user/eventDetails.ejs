@@ -109,7 +109,7 @@
           event.preventDefault();
 
           const eventId = "<%= event._id %>"; // Ensure `event._id` is a valid ObjectId
-          console.log("Event ID (client):", eventId);
+          //console.log("Event ID (client):", eventId);
 
           if (!eventId || eventId.length !== 24) {
             Swal.fire("Error", "Invalid Event ID", "error");

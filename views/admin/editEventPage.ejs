@@ -94,7 +94,7 @@
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
 
-        console.log("data sent to", data);
+       // console.log("data sent to", data);
         try {
           const response = await fetch("/event/edit/<%= event._id %>", {
             method: "POST",

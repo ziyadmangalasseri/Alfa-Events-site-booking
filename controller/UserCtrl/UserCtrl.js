@@ -2,8 +2,8 @@ const userModel = require("../../model/userModel");
 
 const homePage = (req, res) => {
     res.render("user/home");
-  console.log("admin is ",req.session.adminisLoggedIn);
-  console.log("user is ",req.session.userisLoggedIn);
+  // console.log("admin is ",req.session.adminisLoggedIn);
+  // console.log("user is ",req.session.userisLoggedIn);
 
   
 };
