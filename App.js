@@ -2,6 +2,7 @@ const express = require("express");
 const session = require("express-session");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv").config();
+const path = require("path");
 const bcrypt = require("bcrypt");
 const bodyParser = require("body-parser");
 const cors = require("cors");
