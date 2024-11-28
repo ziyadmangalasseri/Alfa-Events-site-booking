@@ -6,6 +6,9 @@ const path = require("path");
 const bcrypt = require("bcrypt");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const MongoStore = require("connect-mongo");
+
+
 
 const { notFound, errorHandler } = require("./middleware/errorHandler");
 
@@ -59,7 +62,7 @@ mongoose
   .then(() => {
     console.log("MongoDB connection successful");
     app.listen(PORT, () => {
-      console.log(`Server running at http://localhost:${PORT}`);
+      console.log(`Server running on ${PORT}`);
     });
   })
   .catch((err) => {
