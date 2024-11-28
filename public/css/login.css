@@ -1,5 +1,6 @@
 body {
   font-family: Arial, sans-serif;
+  position: fixed;
   background-color: white;
   background-size: cover;
   background-repeat: no-repeat;
@@ -203,7 +204,6 @@ animation: test6 40s linear infinite;
 .content-box {
   height: 600px;
   width: 350px;
-  position: fixed;
   max-width: 600px;
   background: rgba(0, 0, 0, 0.3);
   border-radius: 15px;
