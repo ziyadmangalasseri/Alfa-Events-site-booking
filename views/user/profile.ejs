@@ -3,8 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Alfa Events Login</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+    <title>Alfa-Events</title>
+    <link rel="icon" href="/images/AlfaEvents-icon.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@200;700&display=swap"
       rel="stylesheet"
@@ -19,11 +23,17 @@
       <div class="circle-4"></div>
       <div class="circle-5"></div>
       <div class="circle-6"></div>
-  </div>
-    <div class="container d-flex align-items-center justify-content-center min-vh-100">
+    </div>
+    <div
+      class="container d-flex align-items-center justify-content-center min-vh-100"
+    >
       <div class="content-box">
         <div class="card-header text-center mb-3">
-          <img class="alfa-logo img-fluid" src="/images/ALFA_EVENT_LOGO1.png" alt="ALFA Event Logo" />
+          <img
+            class="alfa-logo img-fluid"
+            src="/images/ALFA_EVENT_LOGO1.png"
+            alt="ALFA Event Logo"
+          />
         </div>
         <div class="details-div">
           <ul class="list-unstyled">
@@ -45,19 +55,21 @@
             </li>
             <li class="info-item">
               <span class="label">Joining Date</span>
-              <span class="value text-white">: <%= users.JoiningDate.toDateString() %></span>
+              <span class="value text-white"
+                >: <%= users.JoiningDate.toDateString() %></span
+              >
             </li>
             <li class="info-item">
               <span class="label">Date Of Birth</span>
-              <span class="value text-white">: <%= users.DateOfBirth.toDateString() %></span>
+              <span class="value text-white"
+                >: <%= users.DateOfBirth.toDateString() %></span
+              >
             </li>
             <li class="info-item">
               <span class="label">Blood Group</span>
               <span class="value text-white">: <%= users.BloodGroup %></span>
             </li>
           </ul>
-          
-          
         </div>
         <div class="footer">
           <button onclick="goBack()">Home</button>
@@ -68,9 +80,8 @@
   </body>
 </html>
 
-
 <script>
-  function goBack(){
+  function goBack() {
     window.history.back();
   }
 </script>
