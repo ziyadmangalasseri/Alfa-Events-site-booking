@@ -116,7 +116,7 @@ const userBookedEventDetails = async (req, res) => {
       });
     }
 
-    res.render("user/bookedeventDetails", { event });
+    res.render("user/bookedEventDetails", { event });
   } catch (error) {
     console.error(error.message);
     res.status(500).json({ success: false, message: "Internal server error" });
