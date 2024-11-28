@@ -126,10 +126,14 @@
 
             const result = await response.json();
 
+            
             if (response.ok) {
-              Swal.fire("Success!", "Event booked successfully.", "success");
-              window.location.href = "/home";
-            } else {
+              Swal.fire
+              ("Success!", "Event booked successfully.", "success")
+              .then(()=>{
+                window.location.href = "/home";
+              })
+          } else {
               Swal.fire(
                 "Error!",
                 result.error || "Failed to book the event.",
