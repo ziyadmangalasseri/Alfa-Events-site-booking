@@ -128,30 +128,30 @@ const login = (req, res) => {
   res.render("login",{apiUrl});
 };
 const userLogin = async (req, res) => {
-  console.log("User login process started");
+ // console.log("User login process started");
   const { userId, password } = req.body;
-  console.log("Login attempt with:", req.body);
+ // console.log("Login attempt with:", req.body);
 
   try {
     const findUser = await User.findOne({ userId: userId });
 
     if (!findUser) {
-      console.log("User not found");
+    //  console.log("User not found");
       return res
         .status(400)
         .json({ success: false, message: "Invalid userId" });
     }
 
-    console.log("User found");
+   // console.log("User found");
     const isPasswordCorrect = await bcrypt.compare(password, findUser.password);
     if (!isPasswordCorrect) {
-      console.log("Invalid password");
+     // console.log("Invalid password");
       return res
         .status(401)
         .json({ success: false, message: "Invalid password" });
     }
 
-    console.log("Password verified");
+   // console.log("Password verified");
 
    
 
