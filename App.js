@@ -18,7 +18,6 @@ const AdminRouter = require("./route/adminRoute");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const MONGOURL = process.env.MONGO_URI;
 
 // EJS view engine setup
 app.set("view engine", "ejs");
@@ -37,7 +36,11 @@ app.use(
 // Middleware
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
-app.use(cors());
+app.use(cors
+  ({
+  origin:["http://localhost:3000","https://alfa-events-site-booking.onrender.com"],
+  methods:["GET","POST"]
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 

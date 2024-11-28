@@ -120,7 +120,12 @@ const editEmployeePage = async (req, res) => {
 };
 
 const login = (req, res) => {
-  res.render("login");
+  const apiUrl =
+    process.env.NODE_ENV === "production"
+      ? process.env.API_PRODUCTION_URL
+      : process.env.API_DEVELOPMENT_URL;
+      
+  res.render("login",{apiUrl});
 };
 const userLogin = async (req, res) => {
   console.log("User login process started");
