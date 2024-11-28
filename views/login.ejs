@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="css/login.css" />
   </head>
   <body>
-    <div class="page">
+    <div class="page position-fixed">
       <div class="circle-1"></div>
       <div class="circle-2"></div>
       <div class="circle-3"></div>
@@ -26,7 +26,7 @@
     <div
       class="container d-flex align-items-center justify-content-center min-vh-100"
     >
-      <div class="content-box position-fixed">
+      <div class="content-box">
         <div class="login-box-header text-center mb-3">
           <img
             class="alfa-logo img-fluid"
@@ -98,6 +98,8 @@
     </script>
 
     <script>
+
+      const apiUrl= "<%= apiUrl %>";
       const form = document.getElementById("login-form");
       form.addEventListener("submit", (event) => {
         event.preventDefault();
@@ -105,8 +107,8 @@
         const password = document.getElementById("password").value;
 
         if (userId && password) {
-          console.log("signin fetch started");
-          fetch(`https://alfa-events-site-booking.onrender.com/userlogin`, {
+            fetch(`${apiUrl}/userlogin`, {
+
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -115,7 +117,6 @@
           })
             .then((response) => {
               if (!response.ok) {
-                // Check if the response is a JSON error message from the backend
                 return response.json().then((data) => {
                   throw new Error(data.message || "An error occurred.");
                 });
