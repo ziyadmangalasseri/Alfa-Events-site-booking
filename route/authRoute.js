@@ -8,8 +8,8 @@ const {
   logout,
 } = require("../controller/auth");
 
-router.get("/signup", signup);
-router.post("/createAccount", createAccount);
+// router.get("/signup", signup);
+// router.post("/createAccount", createAccount);
 
 router.get("/", login);
 router.get("/logout", logout);
