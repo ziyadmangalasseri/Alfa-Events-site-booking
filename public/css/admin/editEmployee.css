@@ -228,6 +228,9 @@ animation: test6 40s linear infinite;
     justify-content: center;
     scrollbar-width: none;
   }
+  .details-div ul {
+    margin: auto;
+  }
   
   .details-div::-webkit-scrollbar {
     display: none; /* For Chrome, Safari, and Edge */
@@ -262,6 +265,16 @@ animation: test6 40s linear infinite;
   .form-control::placeholder, 
   textarea::placeholder {
     color: #747373; /* Replace with your desired color */
+  }
+  
+  .password-btn{
+    margin-top: 10px;
+    border-radius: 8px;
+    border: none;
+    width: 100%;
+    height: 30px;
+    color: black;
+    background-color: rgb(122, 143, 0);
   }
   .footer{
     display: flex;
