@@ -211,6 +211,58 @@ const removeEmployeeFromEvent = async (req, res) => {
 };
 
 
+const changePassword = async (req, res) => {
+  try {
+    const employeeId = req.params.id; // Get the employee ID from the URL
+    const employee = await EmployeeModel.findById(employeeId); // Fetch employee details from the database
+
+    if (!employee) {
+      return res.status(404).send("Employee not found");
+    }
+
+    // Render the changePassword page with employee details
+    res.render("admin/changePassword", { employee });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal server error");
+  }
+};
+
+
+const updatePassword = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { newPassword } = req.body;
+
+    // Validate input
+    if (!newPassword) {
+      return res.status(400).json({ error: "Password is required." });
+    }
+
+    // Hash the password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // Update the employee's password in the database
+    const employee = await EmployeeModel.findByIdAndUpdate(
+      id,
+      { password: hashedPassword },
+      { new: true }
+    );
+
+    if (!employee) {
+      return res.status(404).json({ error: "Employee not found." });
+    }
+
+    res.status(200).json({ message: "Password updated successfully." });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal server error." });
+  }
+};
+
+
+
+
 module.exports = {
   renderEmployeeForm,
   addEmployee,
@@ -219,5 +271,7 @@ module.exports = {
   editEmployee,
   editEmployeePage,
   deleteEmployee,
-  removeEmployeeFromEvent
+  removeEmployeeFromEvent,
+  changePassword,
+  updatePassword
 };
