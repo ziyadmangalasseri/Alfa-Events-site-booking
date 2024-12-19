@@ -294,6 +294,13 @@ animation: test6 40s linear infinite;
   border: none;
   border-radius: 5px;
 }
+.unreport-btn{
+  background-color: rgb(201, 232, 30);
+  width: 70px;
+  color: black;
+  border: none;
+  border-radius: 5px;
+}
 .footer {
   height: 60px;
   display: flex;

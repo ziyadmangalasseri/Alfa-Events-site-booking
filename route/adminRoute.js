@@ -22,7 +22,8 @@ const {
   removeEmployeeFromEvent,
   changePassword,
   updatePassword,
-  employeeReported
+  employeeReported,
+  unReportEmployee
 } = require("../controller/AdminCtrl/EmployeeCtrl");
 
 const { dashboard } = require("../controller/AdminCtrl/adminCtrl");
@@ -48,6 +49,7 @@ router.get("/event/edit/:id",adminisAuthenticated, EditEventPage);
 router.post("/event/edit/:id",adminisAuthenticated, EditEvent);
 router.delete('/event/:eventId/employee/:userId',adminisAuthenticated, removeEmployeeFromEvent);
 router.post("/employeeReported/:id",adminisAuthenticated,employeeReported);
+router.delete("/employeeUnreported/:id", adminisAuthenticated, unReportEmployee);
 
 router.get("/changePassword/:id",adminisAuthenticated,changePassword)
 router.put("/updatePassword/:id", adminisAuthenticated, updatePassword);
