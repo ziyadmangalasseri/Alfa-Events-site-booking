@@ -1,4 +1,3 @@
-
 const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
   name: {
@@ -36,6 +35,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  CompletedEvents: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "events", // Reference to the Events collection
+    },
+  ],
   isAdmin: {
     type: Boolean,
     default: false,

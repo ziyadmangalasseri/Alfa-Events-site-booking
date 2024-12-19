@@ -262,6 +262,7 @@ animation: test6 40s linear infinite;
   color: white;
 }
 .table td{
+  justify-content: center;
   color: white;
   border: solid 1px;
   font-size: medium;
@@ -273,9 +274,23 @@ animation: test6 40s linear infinite;
   border: solid 1px;
 
 }
+.action-div{
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 .remove-btn{
   background-color: red;
+  width: 70px;
   color: white;
+  border: none;
+  border-radius: 5px;
+}
+.reported-btn{
+  background-color: rgb(39, 237, 112);
+  width: 70px;
+  color: black;
   border: none;
   border-radius: 5px;
 }

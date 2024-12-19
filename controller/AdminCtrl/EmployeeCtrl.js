@@ -260,6 +260,33 @@ const updatePassword = async (req, res) => {
   }
 };
 
+const employeeReported = async (req, res) => {
+  try {
+    const { id } = req.params; // employeeId
+    const { eventId } = req.body; // eventId passed from the frontend
+
+    // Find the employee and update CompletedEvents
+    const employee = await EmployeeModel.findOneAndUpdate(
+      { _id: id },
+      { $addToSet: { CompletedEvents: eventId } }, // Add eventId if not already present
+      { new: true }
+    );
+
+    if (!employee) {
+      return res.status(404).json({ error: "Employee not found" });
+    }
+
+    return res
+      .status(200)
+      .json({ message: "Event marked as completed", employee });
+  } catch (err) {
+    console.error("Error marking event as completed:", err.message);
+    return res
+      .status(500)
+      .json({ error: "An error occurred while updating the event." });
+  }
+};
+
 
 
 
@@ -273,5 +300,6 @@ module.exports = {
   deleteEmployee,
   removeEmployeeFromEvent,
   changePassword,
-  updatePassword
+  updatePassword,
+  employeeReported,
 };
