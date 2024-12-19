@@ -45,7 +45,7 @@ const EventdetailsPage = async (req, res) => {
 
     const event = await Event.findById(eventId).populate(
       "currentEmployers", 
-      "name userId" 
+      "name userId CompletedEvents" 
     );
 
     if (event) {
