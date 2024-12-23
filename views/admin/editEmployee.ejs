@@ -114,6 +114,25 @@
                   </button></a
                 >
               </li>
+              <li class="password-li">
+                <% if (!employee.isAdmin) { %>
+                <button
+                  type="button"
+                  class="makeadmin-btn"
+                  onclick="updateAdminStatus('<%= employee._id %>', true)"
+                >
+                  Make Admin
+                </button>
+                <% } else { %>
+                <button
+                  type="button"
+                  class="makeadmin-btn"
+                  onclick="updateAdminStatus('<%= employee._id %>', false)"
+                >
+                  Remove Admin
+                </button>
+                <% } %>
+              </li>
             </ul>
           </div>
           <div class="footer">
@@ -201,6 +220,41 @@
             Swal.fire("Error", "An unexpected error occurred", "error");
           }
         });
+    </script>
+    <script>async function updateAdminStatus(employeeId, makeAdmin) {
+      try {
+        const endpoint = makeAdmin
+          ? `/makeadmin/${employeeId}`
+          : `/removeadmin/${employeeId}`;
+    
+        const response = await fetch(endpoint, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+    
+        const result = await response.json();
+    
+        if (response.ok) {
+          Swal.fire(
+            "Success",
+            makeAdmin
+              ? "Employee promoted to admin successfully!"
+              : "Admin privileges removed successfully!",
+            "success"
+          ).then(() => {
+            window.location.reload(); // Reload the page to reflect the updated status
+          });
+        } else {
+          Swal.fire("Error", result.error || "Failed to update admin status", "error");
+        }
+      } catch (error) {
+        console.error(error);
+        Swal.fire("Error", "An unexpected error occurred", "error");
+      }
+    }
+    
     </script>
   </body>
 </html>
