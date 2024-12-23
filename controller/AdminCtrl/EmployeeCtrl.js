@@ -20,7 +20,16 @@ const addEmployee = async (req, res) => {
       BloodGroup,
     } = req.body;
 
-    if (!name || !userId || !password || !number || !place || !JoiningDate || !DateOfBirth || !BloodGroup) {
+    if (
+      !name ||
+      !userId ||
+      !password ||
+      !number ||
+      !place ||
+      !JoiningDate ||
+      !DateOfBirth ||
+      !BloodGroup
+    ) {
       return res.status(400).send("All fields are required.");
     }
 
@@ -28,11 +37,13 @@ const addEmployee = async (req, res) => {
       $or: [{ userId }, { number }],
     });
     if (existingEmployee) {
-      return res.status(409).send(
-        `Employee with ${
-          existingEmployee.userId === userId ? "UserId" : "Phone Number"
-        } already exists`
-      );
+      return res
+        .status(409)
+        .send(
+          `Employee with ${
+            existingEmployee.userId === userId ? "UserId" : "Phone Number"
+          } already exists`
+        );
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -76,7 +87,6 @@ const employeeDetails = async (req, res) => {
       return res.status(404).send("Employee not found");
     }
 
-   
     const formattedEmployee = {
       ...employee._doc,
       JoiningDate: new Date(employee.JoiningDate).toISOString().split("T")[0],
@@ -150,7 +160,7 @@ const editEmployee = async (req, res) => {
 
 const deleteEmployee = async (req, res) => {
   try {
-    const employeeId = req.params.id; 
+    const employeeId = req.params.id;
     if (!employeeId) {
       return res.status(400).json({ error: "Invalid Employee ID" });
     }
@@ -174,8 +184,13 @@ const removeEmployeeFromEvent = async (req, res) => {
   try {
     const { eventId, userId } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(eventId) || !mongoose.Types.ObjectId.isValid(userId)) {
-      return res.status(400).json({ error: "Invalid Event ID or User ID format" });
+    if (
+      !mongoose.Types.ObjectId.isValid(eventId) ||
+      !mongoose.Types.ObjectId.isValid(userId)
+    ) {
+      return res
+        .status(400)
+        .json({ error: "Invalid Event ID or User ID format" });
     }
 
     const event = await Event.findById(eventId);
@@ -210,7 +225,6 @@ const removeEmployeeFromEvent = async (req, res) => {
   }
 };
 
-
 const changePassword = async (req, res) => {
   try {
     const employeeId = req.params.id; // Get the employee ID from the URL
@@ -227,7 +241,6 @@ const changePassword = async (req, res) => {
     res.status(500).send("Internal server error");
   }
 };
-
 
 const updatePassword = async (req, res) => {
   try {
@@ -287,7 +300,6 @@ const employeeReported = async (req, res) => {
   }
 };
 
-
 const unReportEmployee = async (req, res) => {
   try {
     const { id } = req.params; // employeeId
@@ -315,9 +327,52 @@ const unReportEmployee = async (req, res) => {
   }
 };
 
+const makeAdmin = async (req, res) => {
+  try {
+    const employeeId = req.params.id;
+
+    const employee = await EmployeeModel.findByIdAndUpdate(
+      employeeId,
+      { isAdmin: true },
+      { new: true } // Return the updated document
+    );
+
+    if (!employee) {
+      return res.status(404).json({ error: "Employee not found" });
+    }
+
+    return res.status(200).json({
+      message: "Employee successfully converted to admin",
+      employee,
+    });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ error: "An internal server error occurred" });
+  }
+};
 
 
+const removeAdmin = async (req, res) => {
+  try {
+    const employeeId = req.params.id;
 
+    const employee = await EmployeeModel.findByIdAndUpdate(
+      employeeId,
+      { isAdmin: false },
+      { new: true }
+    );
+    if (!employee) {
+      return res.status(404).json({ error: "Employee not found" });
+    }
+
+    return res
+      .status(200)
+      .json({ message: "Admin privileges removed successfully", employee });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).json({ error: "Server error" });
+  }
+};
 module.exports = {
   renderEmployeeForm,
   addEmployee,
@@ -330,5 +385,7 @@ module.exports = {
   changePassword,
   updatePassword,
   employeeReported,
-  unReportEmployee
+  unReportEmployee,
+  makeAdmin,
+  removeAdmin
 };
