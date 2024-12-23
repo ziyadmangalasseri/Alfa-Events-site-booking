@@ -98,7 +98,7 @@ const EditEventPage = async (req, res) => {
 
     // Format date and expiration time for input fields
     event.formattedDate = event.date.toISOString().split("T")[0]; // YYYY-MM-DD for <input type="date">
-    event.formattedExpirationTime = event.expirationTime.toISOString().slice(0, 16); // YYYY-MM-DDTHH:MM for <input type="datetime-local">
+    // event.formattedExpirationTime = event.expirationTime.toISOString().slice(0, 16); // YYYY-MM-DDTHH:MM for <input type="datetime-local">
 
     res.render("admin/editEventPage", { event });
   } catch (error) {
@@ -119,9 +119,9 @@ const AddEvent = async (req, res) => {
       jobTitle,
       jobDescription,
       employerLimit,
-      expirationTime,
+      // expirationTime,
     } = req.body;
-    const formattedExpirationTime = new Date(expirationTime);
+    // const formattedExpirationTime = new Date(expirationTime);
     const newEvent = new Event({
       place: place,
       date: date,
@@ -130,7 +130,7 @@ const AddEvent = async (req, res) => {
       jobTitle: jobTitle,
       jobDescription: jobDescription,
       employerLimit: employerLimit,
-      expirationTime: formattedExpirationTime,
+      // expirationTime: formattedExpirationTime,
      
     });
     await newEvent.save();
@@ -156,7 +156,7 @@ const EditEvent = async (req, res) => {
       jobTitle,
       jobDescription,
       employerLimit,
-      expirationTime,
+      // expirationTime,
     } = req.body;
 
     const newEvent = await Event.findByIdAndUpdate(eventId, {
@@ -167,7 +167,7 @@ const EditEvent = async (req, res) => {
       jobTitle,
       jobDescription,
       employerLimit,
-      expirationTime,
+      // expirationTime,
     });
     await newEvent.save();
     res

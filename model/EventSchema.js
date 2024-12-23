@@ -31,10 +31,10 @@ const EventSchema = new mongoose.Schema(
       default: 0,
       min: 0,
     },
-    expirationTime: {
-      type: Date,
-      required: true,
-    },
+    // expirationTime: {
+    //   type: Date,
+    //   required: true,
+    // },
     currentEmployers: [
       { type: mongoose.Schema.Types.ObjectId, ref: "employees" },
     ],
